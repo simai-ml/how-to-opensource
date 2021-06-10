@@ -98,7 +98,7 @@ Afin d'assurer un niveau de qualité constant, particulièrement dans le cas d'u
 - réduire le temps nécessaire à la détection et l'analyse de problèmes car chaque changement est validé granulairement
 - réduire le temps de cycle pour la livraison de nouvelles fonctionnalités tout en en améliorant la qualité
 
-Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet rendez vous sur l'onglet **Actions**. Pour scréer notre workflow d'intégration continue nous allons partir du template **Python package**, cliquez sur **Setup this workflow**. Modifiez ensuite les étapes du workflow pour coller aux éléments défins précédement:
+Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet rendez vous sur l'onglet **Actions**. Pour scréer notre workflow d'intégration continue nous allons partir du template **Python Package using Anaconda**, cliquez sur **Setup this workflow**. Modifiez ensuite les étapes du workflow pour coller aux éléments défins précédement:
 
 - déploiement sur Python 3.9 uniquement
 - installation par environment.yml
