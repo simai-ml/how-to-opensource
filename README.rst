@@ -1,11 +1,12 @@
 .. -*- mode: rst -*-
 
-|Build & Test|_ |Documentation|_
+|GitHubActions|_ |ReadTheDocs|_
 
-.. |Build & Test| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/python-package-conda.yml/badge.svg
+.. |GitHubActions| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/test.yml/badge.svg
+.. _GitHubActions: https://github.com/simai-ml/how-to-opensource/actions
 
-.. |Documentation| image:: https://readthedocs.org/projects/how-to-opensource/badge/?version=latest
-.. _Documentation https://how-to-opensource.readthedocs.io/en/latest/?badge=latest
+.. |ReadTheDocs| image:: https://readthedocs.org/projects/how-to-opensource/badge
+.. _ReadTheDocs: https://how-to-opensource.readthedocs.io/en/latest
 
 BBL - Publier un package en open-source en dix étapes clés
 ==========================================================
