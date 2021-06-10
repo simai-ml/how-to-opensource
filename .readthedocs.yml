@@ -3,12 +3,6 @@ version: 2
 build:
   image: latest
 
-python:
-  version: 3.9
-  install:
-    - method: pip
-      path: .
-
 conda:
   environment: environment.yml
   
