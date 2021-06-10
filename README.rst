@@ -185,8 +185,16 @@ Nous avons maintenant en place un pipeline automatique de publication de documen
 Exercice n°9: Packaging
 =======================
 
+De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapuslant les modules et variables. Pour cela, il est nécessaire d'ajouter un fichier **setup.py** à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_. Il ne vous reste plus qu'à builder votre package
+
+.. code:: shell-session
+
+  $ python setup.py build
+
 Exercice n°10: Gestion du dépôt
 ===============================
+
+TODO
 
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
 .. _EnvConda: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
@@ -203,3 +211,5 @@ Exercice n°10: Gestion du dépôt
 .. _SphinxGallery: https://sphinx-gallery.github.io/stable/getting_started.html
 .. _CircleIO: https://circleci.com/
 .. _GitHubActions: https://github.com/features/actions
+.. _package: https://docs.python.org/3/tutorial/modules.html#packages
+.. _tutoriel: https://pythonhosted.org/an_example_pypi_project/setuptools.html
