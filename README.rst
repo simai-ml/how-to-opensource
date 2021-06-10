@@ -44,7 +44,7 @@ Installez et activez l'EnvConda_:
 .. code:: shell-session
 
   cd how-to-opensource
-  conda env create -f environment.dev.yml
+  conda env create -f environment.yml
   conda activate how_to_opensource
 
 Exercice n°2: Création d'un module et d'une fonction
@@ -91,20 +91,21 @@ Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test
 Exercice n°6: Intégration continue du code
 ==========================================
 
-Afin d'assurer un niveau de qualité constant, particulièrement dans le cas d'un projet opensource avec de multiples contributeurs, il est indispensable d'automatiser le processus d'intégration des changements réalisés. C'est à ce point que répond l'intégration continue. Se basant sur la description d'un pipeline incluant build, test et déploiement, les outils d'integration continue, par exemple Travis CI en permettent l'automatisation. Cela apporte les valeurs suivantes:
+Afin d'assurer un niveau de qualité constant, particulièrement dans le cas d'un projet opensource avec de multiples contributeurs, il est indispensable d'automatiser le processus d'intégration des changements réalisés. C'est à ce point que répond l'intégration continue. Se basant sur la description d'un pipeline incluant build, test et déploiement, les outils d'integration continue, par exemple GitHubActions_ ou TravisCI_ en permettent l'automatisation. Cela apporte les valeurs suivantes:
 
 - minimiser la charge de travail pour les concepteurs
 - supprimer les erreurs arrivent dans toute action "à la main"
 - réduire le temps nécessaire à la détection et l'analyse de problèmes car chaque changement est validé granulairement
 - réduire le temps de cycle pour la livraison de nouvelles fonctionnalités tout en en améliorant la qualité
 
-Créez donc un compte (gratuitement!) sur TravisCI_ en utilisant votre compte GitHUB. Activez ensuite l'intégration GitHUB. Il vous reste maintenant à ajouter un fichier **.travis.yml** à la racine du projet qui va décrire le processus d'intégration continue qui à ce stade doit contenir:
+Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet rendez vous sur l'onglet **Actions**. Pour scréer notre workflow d'intégration continue nous allons partir du template **Python package**, cliquez sur **Setup this workflow**. Modifiez ensuite les étapes du workflow pour coller aux éléments défins précédement:
 
-- la définition de l'OS utilisé
-- la création de l'environement conda
-- les tests implémentés jusqu'ici
+- déploiement sur Python 3.9 uniquement
+- installation par environment.yml
+- pas d'analyse statique de code (suppression de la section Lint)
+- complétion de la commande de test
 
-Une fois le fichier créé ajouté au dépôt et poussé, suivez l'execution du pipeline depuis l'interface de Travis CI. Un mail vous sera automatiquement envoyé en fin d'execution pour vous informer des résultats.
+Une fois le fichier créé ajouté au dépôt, vous pouvez suivre l'execution du pipeline depuis l'interface de GitHub. Un mail vous sera automatiquement envoyé en fin d'execution pour vous informer des résultats.
 
 Exercice n°7: Génération de la documentation
 ============================================
@@ -124,7 +125,7 @@ Pour génerer la documentation il vous suffit maintenant d'executer le script no
   $ make html
   $ cd -
 
-La documentation a été générée dans le repertoire **doc/_build**, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter `'sphinx.ext.autodoc'`, 'sphinx.ext.napoleon'`, `'sphinx.ext.autodoc'` et `'sphinx_autodoc_typehints'` à la liste des extensions et enfin d'ajouter la demande d'extraction de documentation du module dans **doc/index.rst** qui sera par ailleurs le point d'entrée de toute rédactions additionnelle.
+La documentation a été générée dans le repertoire **doc/_build**, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter `'sphinx.ext.autodoc'`, `'sphinx.ext.napoleon'`, `'sphinx.ext.autodoc'` et `'sphinx_autodoc_typehints'` à la liste des extensions et enfin d'ajouter la demande d'extraction de documentation du module dans **doc/index.rst** qui sera par ailleurs le point d'entrée de toute rédactions additionnelle.
 
 .. code::
 
@@ -187,3 +188,4 @@ Exercice n°10: Gestion du dépôt
 .. _ReadTheDocs: https://readthedocs.org/
 .. _SphinxGallery: https://sphinx-gallery.github.io/stable/getting_started.html
 .. _CircleIO: https://circleci.com/
+.. _GitHubActions: https://github.com/features/actions
