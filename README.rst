@@ -1,12 +1,12 @@
 .. -*- mode: rst -*-
 
-|GitHubActions|_ |ReadTheDocs|_
+|GitHubActionsBadge|_ |ReadTheDocsBadge|_
 
-.. |GitHubActions| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/test.yml/badge.svg
-.. _GitHubActions: https://github.com/simai-ml/how-to-opensource/actions
+.. |GitHubActionsBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/python-package-conda.yml/badge.svg
+.. _GitHubActionsBadge: https://github.com/simai-ml/how-to-opensource/actions
 
-.. |ReadTheDocs| image:: https://readthedocs.org/projects/how-to-opensource/badge
-.. _ReadTheDocs: https://how-to-opensource.readthedocs.io/en/latest
+.. |ReadTheDocsBadge| image:: https://readthedocs.org/projects/how-to-opensource/badge
+.. _ReadTheDocsBadge: https://how-to-opensource.readthedocs.io/en/latest
 
 BBL - Publier un package en open-source en dix étapes clés
 ==========================================================
@@ -162,11 +162,25 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
 Exercice n°8: Intégration continue de la documentation
 ======================================================
 
-Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Commencez par créer un compte en utilisant votre login GitHUB.
-Une fois inscrit et connecté, importez votre projet GitHUB, après avoir soigneusement choisi la branche et la version, lancez la compilation.
+Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier **.readthedocs.yml**, ajoutez donc ce fichier au dépôt avec le contenu suivant:
+
+.. code::
+  version: 2
+
+  build:
+    image: latest
+
+  conda:
+    environment: environment.yml
+    
+  sphinx:
+    builder: html
+    configuration: doc/conf.py
+    fail_on_warning: false
+
+Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHUB. Une fois inscrit et connecté, importez votre projet GitHUB, après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
 
 Nous avons maintenant en place un pipeline automatique de publication de documentation. Nous allons maintenant ajouter l'intégration continue de cette documentation et pour cela utiliser le service CircleIO_
-
 
 Exercice n°9: Packaging
 =======================
