@@ -1,12 +1,11 @@
 .. -*- mode: rst -*-
 
-|Travis|_ |ReadTheDocs|_
+|Build & Test|_ |Documentation|_
 
-.. |Travis| image:: https://travis-ci.com/dhervault/how-to-opensource.svg?branch=correction
-.. _Travis: https://travis-ci.com/dhervault/how-to-opensource.svg
+.. |Build & Test| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/python-package-conda.yml/badge.svg
 
-.. |ReadTheDocs| image:: https://readthedocs.org/projects/how-to-opensource/badge/?version=latest
-.. _ReadTheDocs: https://how-to-opensource.readthedocs.io/en/latest
+.. |Documentation| image:: https://readthedocs.org/projects/how-to-opensource/badge/?version=latest
+.. _Documentation https://how-to-opensource.readthedocs.io/en/latest/?badge=latest
 
 BBL - Publier un package en open-source en dix étapes clés
 ==========================================================
@@ -159,11 +158,11 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
 
     auto_examples/index
 
-Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Commencez par créer un compte en utilisant votre login GitHUB.
-Une fois inscrit et connecté, importez votre projet GitHUB, après avoir soigneusement choisi la branche et la version, lancez la compilation.
-
 Exercice n°8: Intégration continue de la documentation
 ======================================================
+
+Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Commencez par créer un compte en utilisant votre login GitHUB.
+Une fois inscrit et connecté, importez votre projet GitHUB, après avoir soigneusement choisi la branche et la version, lancez la compilation.
 
 Nous avons maintenant en place un pipeline automatique de publication de documentation. Nous allons maintenant ajouter l'intégration continue de cette documentation et pour cela utiliser le service CircleIO_
 
