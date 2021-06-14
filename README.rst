@@ -191,6 +191,8 @@ De façon à offrir une API claire à l'ensemble des modules de notre projet (ce
 
   $ python setup.py build
 
+TODO ajouter les dependences (incl. extradeps)
+
 Exercice n°10: Gestion du dépôt
 ===============================
 
@@ -219,11 +221,12 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroit (setup
   search = version = "{current_version}"
   replace = version = "{new_version}"
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi, pour cela rendez vous dans l'onglet action du projet GitHub. Ajoutez un nouveau worflow en vous basant sur le template "Publish Python Package".
+Maintenant nous allons mettre en place la publication automatique sur PyPi, pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
 
-TODO finish
+Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sur à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
 
-Enfin il convient d'ajouter de documentater les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sur à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
+TODO ajouter template d'issue
+TODO ajouter une pull request
 
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
 .. _EnvConda: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
@@ -243,3 +246,4 @@ Enfin il convient d'ajouter de documentater les régles de contribution et d'usa
 .. _package: https://docs.python.org/3/tutorial/modules.html#packages
 .. _tutoriel: https://pythonhosted.org/an_example_pypi_project/setuptools.html
 .. _bump2version: https://github.com/c4urself/bump2version
+.. _PyPi: https://pypi.org/account/register/
