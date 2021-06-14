@@ -30,8 +30,8 @@ Si vous n'avez pas de conda installé : téléchargez l'installeur Conda_ ou ex�
 
 Attention à bien accepter la demande d'initialisation.
 
-Exercice n°1: Mise en place de l'environement
-=============================================
+Exercice n°1: Mise en place de l'environnement
+==============================================
 
 Clonez votre dépôt forké:
 
@@ -194,7 +194,36 @@ De façon à offrir une API claire à l'ensemble des modules de notre projet (ce
 Exercice n°10: Gestion du dépôt
 ===============================
 
-TODO
+Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il maintenant nécessaire de donner à ses deux populations les outils dont ils ont besoin.
+Une accessibilité simple et maitrisée pour les premiers, de clarté sur les réglès de leur engagement pour les seconds.
+
+Pour faciliter l'accessibilité du package, sa mise à disposition sur PiPy est un defacto standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consomateurs de maitriser l'inclusion du package dans leur projet en en controllant par exemple les versions utilisées.
+Dans la mesure où ce nom de version va se retrouver à plusieurs endroit (setup.py, doc/conf.py, ...), et pour ne pas risquer d'erreur dans le maintient en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier **.bumpversion.cfg** à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initalement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
+
+.. code::
+
+  [bumpversion]
+  current_version = 0.0.1
+  commit = True
+  tag = True
+
+  [bumpversion:file:setup.py]
+  search = VERSION = "{current_version}"
+  replace = VERSION = "{new_version}"
+
+  [bumpversion:file:how_to_opensource/_version.py]
+  search = __version__ = "{current_version}"
+  replace = __version__ = "{new_version}"
+
+  [bumpversion:file:doc/conf.py]
+  search = version = "{current_version}"
+  replace = version = "{new_version}"
+
+Maintenant nous allons mettre en place la publication automatique sur PyPi, pour cela rendez vous dans l'onglet action du projet GitHub. Ajoutez un nouveau worflow en vous basant sur le template "Publish Python Package".
+
+TODO finish
+
+Enfin il convient d'ajouter de documentater les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sur à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
 
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
 .. _EnvConda: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
@@ -213,3 +242,4 @@ TODO
 .. _GitHubActions: https://github.com/features/actions
 .. _package: https://docs.python.org/3/tutorial/modules.html#packages
 .. _tutoriel: https://pythonhosted.org/an_example_pypi_project/setuptools.html
+.. _bump2version: https://github.com/c4urself/bump2version
