@@ -197,10 +197,10 @@ Exercice n°10: Gestion du dépôt
 ===============================
 
 Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il maintenant nécessaire de donner à ses deux populations les outils dont ils ont besoin.
-Une accessibilité simple et maitrisée pour les premiers, de clarté sur les réglès de leur engagement pour les seconds.
+Une accessibilité simple et maitrisée pour les premiers, de clarté sur les règles de leur engagement pour les seconds.
 
-Pour faciliter l'accessibilité du package, sa mise à disposition sur PiPy est un defacto standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consomateurs de maitriser l'inclusion du package dans leur projet en en controllant par exemple les versions utilisées.
-Dans la mesure où ce nom de version va se retrouver à plusieurs endroit (setup.py, doc/conf.py, ...), et pour ne pas risquer d'erreur dans le maintient en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier **.bumpversion.cfg** à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initalement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
+Pour faciliter l'accessibilité du package, sa mise à disposition sur PiPy est un *defacto* standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consommateurs de maitriser l'inclusion du package dans leur projet en en contrôlant par exemple les versions utilisées.
+Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (setup.py, doc/conf.py, ...), et pour ne pas risquer d'erreurs dans le maintien en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier **.bumpversion.cfg** à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initalement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
 
 .. code::
 
@@ -223,7 +223,7 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroit (setup
 
 Maintenant nous allons mettre en place la publication automatique sur PyPi, pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
 
-Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sur à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
+Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sûr à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
 
 TODO ajouter template d'issue
 TODO ajouter une pull request
