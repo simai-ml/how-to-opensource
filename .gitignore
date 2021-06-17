@@ -3,3 +3,4 @@
 doc/_build
 doc/auto_examples
 build
+.vscode

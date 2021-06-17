@@ -17,8 +17,7 @@ Pré-requis
 ==========
 
 1. Avoir un compte GitHub
-2. Faire un **Fork** du dépôt (bouton en haut à droite de GitHub)
-3. Avoir une installation locale de conda
+2. Avoir une installation locale de conda
 
 Si vous n'avez pas de conda installé : téléchargez l'installeur Conda_ ou exécutez les commandes suivantes:
 
@@ -33,25 +32,59 @@ Attention à bien accepter la demande d'initialisation.
 Exercice n°1: Mise en place de l'environnement
 ==============================================
 
-Clonez votre dépôt forké:
+Créez un répertoire vide intitulé **how_to_opensource** sur GitHub.
+
+Clonez le contenu du repo **simai-ml/how_to_opensource** en local et poussez le sur votre compte personnel: 
 
 .. code:: shell-session
 
-  $ git clone https://github.com/COMPTE/how-to-opensource.git
+  $ git clone git@github.com:simai-ml/how-to-opensource.git
+  $ git remote add origin git@github.com:VOTREIDENTIFIANT/how_to_opensource.git
+  $ git branch -M master
+  $ git push -u origin master
 
-Installez et activez l'EnvConda_:
+Installez et activez l'EnvConda_ de développement, environnement qui nous servira à développer le code, la documentation et les tests:
 
 .. code:: shell-session
 
   cd how-to-opensource
-  conda env create -f environment.yml
+  conda env create -f environment.dev.yml
   conda activate how_to_opensource
+
+Créer une branche de travail et supprimez la correction :
+
+.. code:: shell-session
+
+  git checkout -b work
+  chmod +x start.sh
+  ./start.sh
+  git add .
+  git commit -m "start exercises"
+  git push origin work
+
+Vous pouvez commencer !
 
 Exercice n°2: Création d'un module et d'une fonction
 ====================================================
 
 Nous allons maintenant créer dans le Module_ **how_to_opensource** une nouvelle fonction calculant la somme de deux vecteurs.
-Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction `add_two_vectors`. Il est maintenant possible de tester interactivement la méthode :
+Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction `add_two_vectors`.
+
+Afin de pouvoir importer la fonction, vous devez définir les redirections d'imports dans le fichier **how_to_opensource/__init__.py**.
+
+.. code:: python
+
+  from .core import add_two_vectors
+  from ._version import __version__
+  __all__ = ["add_two_vectors", "__version__"]
+
+La première ligne de code vous permet de faire directement `from how_to_opensource import add_two_vectors` au lieu de `from how_to_opensource.core import add_two_vectors`.
+
+La ligne `__all__ = ...` permet à la fonction d'être importée avec la syntaxe `from how_to_opensource import *`.
+
+Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier `_version.py` qui contient une seule ligne de code : `__version__ = "0.0.1"`.
+
+Il est maintenant possible de tester interactivement la méthode :
 
 .. code:: python
 
@@ -59,7 +92,45 @@ Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez un
   from how_to_opensource import add_two_vectors
   add_two_vectors(np.ones(2), np.ones(2))
 
-Exercice n°3: Création d'un test unitaire
+ou la version du package : 
+
+.. code:: python
+
+  import how_to_opensource
+  print(how_to_opensource.__version__)
+
+Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la commande :
+
+.. code:: shell-session
+
+  $ flake8 how_to_opensource
+
+**CORRECTION :** `git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py`
+
+Exercice n°3: Documentation de la fonction
+==========================================
+
+Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à `add_two_vectors` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
+
+.. code:: shell-session
+
+  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+
+**CORRECTION :** `git checkout master how_to_opensource/core.py`
+
+Exercice n°4: Typing
+====================
+
+Une pratique courante pour rendre plus robuste un package consiste à utiliser le typing pour tout ou partie du code. Si l'interpréteur python ne vérifie pas ces types à l'exécution, le langage python propose néanmoins le vocabulaire et la grammaire nécessaire à la définition de ces types par l'intermédiaire du module Typing_.
+Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test. Il est aussi possible d'ajouter un test à l'exécution pour valider que les entrées se conforment au type attendu. Enfin lancez l'analyseur statique de code le second statique utilisant MyPy_.
+
+.. code:: shell-session
+
+  $ mypy how_to_opensource --strict
+
+**CORRECTION :** `git checkout master how_to_opensource/core.py mypy.ini`
+
+Exercice n°5: Création d'un test unitaire
 =========================================
 
 Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est d'utiliser Parameterize_ pour paramétriser les fonctions de test.
@@ -69,24 +140,7 @@ Dans **how_to_opensource/tests/test_core.py** ajoutez une fonction de test valid
 
   $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
-Exercice n°4: Documentation de la fonction
-==========================================
-
-Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à `add_two_vectors` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
-
-.. code:: shell-session
-
-  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
-
-Exercice n°5: Typing
-====================
-
-Une pratique courante pour rendre plus robuste un package consiste à utiliser le typing pour tout ou partie du code. Si l'interpréteur python ne vérifie pas ces types à l'exécution, le langage python propose néanmoins le vocabulaire et la grammaire nécessaire à la définition de ces types par l'intermédiaire du module Typing_.
-Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test. Il est aussi possible d'ajouter un test à l'exécution pour valider que les entrées se conforment au type attendu. Enfin lancez l'analyseur statique de code le second statique utilisant MyPy_.
-
-.. code:: shell-session
-
-  $ mypy how_to_opensource --strict
+**CORRECTION :** `git checkout master how_to_opensource/tests/test_core.py`
 
 Exercice n°6: Intégration continue du code
 ==========================================
