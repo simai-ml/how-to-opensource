@@ -164,15 +164,15 @@ Avoir une documentation à jour est indispensable autant pour les utilisateurs q
   $ sphinx-quickstart doc
 
 Note: il n'est pas nécessaire de séparer les répertoires sources et build dans notre cas simple.
-Pour génerer la documentation il vous suffit maintenant d'executer le script nouvellement créé:
+
+Pour génerer la documentation il vous suffit maintenant d'exécuter le script nouvellement créé:
 
 .. code:: shell-session
 
   $ cd doc
   $ make html
-  $ cd -
 
-La documentation a été générée dans le repertoire **doc/_build**, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter `'sphinx.ext.autodoc'`, `'sphinx.ext.napoleon'`, `'sphinx.ext.autodoc'` et `'sphinx_autodoc_typehints'` à la liste des extensions et enfin d'ajouter la demande d'extraction de documentation du module dans **doc/index.rst** qui sera par ailleurs le point d'entrée de toute rédactions additionnelle.
+La documentation a été générée dans le repertoire **doc/_build**, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter `'sphinx.ext.autodoc'`, `'sphinx.ext.napoleon'`, et `'sphinx_autodoc_typehints'` à la liste des extensions. Enfin, il faut ajouter la documentation automatique du module dans **doc/index.rst** qui sera par ailleurs le point d'entrée de toute rédaction additionnelle:
 
 .. code::
 
@@ -205,6 +205,8 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
     :maxdepth: 2
 
     auto_examples/index
+  
+Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre documentation est belle !
 
 Exercice n°8: Intégration continue de la documentation
 ======================================================
