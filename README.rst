@@ -107,6 +107,8 @@ Dans **how_to_opensource/tests/test_core.py** ajoutez une fonction de test valid
 
   $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
+**CORRECTION :** `git checkout master how_to_opensource/tests/test_core.py`
+
 Exercice n°6: Intégration continue du code
 ==========================================
 
