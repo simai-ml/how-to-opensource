@@ -95,6 +95,12 @@ ou la version du package :
   import how_to_opensource
   print(how_to_opensource.__version__)
 
+Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la commande :
+
+.. code:: shell-session
+
+  $ flake8 how_to_opensource
+
 **CORRECTION :** `git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py`
 
 Exercice n°3: Documentation de la fonction
