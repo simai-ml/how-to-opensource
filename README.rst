@@ -52,6 +52,7 @@ Créer une branche de travail et supprimez la correction :
 .. code:: shell-session
 
   git checkout -b work
+  chmod +x start.sh
   ./start.sh
 
 Vous pouvez commencer !
