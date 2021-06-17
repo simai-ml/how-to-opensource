@@ -233,7 +233,7 @@ Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitH
 
 Une fois inscrit et connecté, importez votre projet GitHUB (attention à ajouter votre trigramme par souci d'unicité).
 
-Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Cela assure que la documentation est reconstruire à chaque pull request.
+Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Cela assure que la documentation est reconstruite à chaque pull request.
 
 Après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
 
@@ -244,22 +244,66 @@ Après avoir soigneusement choisi la branche et la version, lancez la compilatio
 Exercice n°9: Packaging
 =======================
 
-De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapuslant les modules et variables. Pour cela, il est nécessaire d'ajouter un fichier **setup.py** à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_. Il ne vous reste plus qu'à builder votre package
+De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapuslant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier **setup.py** à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
+
+Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteurs qui s'afficheront tels quels sur PyPi_.
+
+.. code:: python
+
+  import os
+  from setuptools import setup
+
+
+  def read(fname):
+      return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+
+  setup(
+      name="QM How to Opensource",
+      version="0.0.1",
+      author="Grégoire Martignon, Vianney Taquet, Damien Hervault",
+      author_email="gmartignon@quantmetry.com",
+      description="A Quantmetry tutorial on how to publish an opensource python package.",
+      license="BSD",
+      keywords="example opensource tutorial",
+      url="http://packages.python.org/how_to_opensource",
+      packages=['how_to_opensource'],
+      install_requires=["numpy>=1.20"],
+      extras_require={
+          "tests": ["flake8", "mypy", "pytest-cov"],
+          "docs": ["sphinx", "sphinx-gallery", "sphinx_rtd_theme", "numpydoc"]
+      },
+      long_description=read('README.rst'),
+      classifiers=[
+          "License :: OSI Approved :: BSD License",
+          "Programming Language :: Python :: 3.9"
+      ],
+  )
+
+Il ne vous reste plus qu'à construire votre package
 
 .. code:: shell-session
 
-  $ python setup.py build
+  $ python setup.py sdist bdist_wheel
 
-TODO ajouter les dependences (incl. extradeps)
+Cela crée trois répertoires : ``dist``, ``build`` et ``QM_How_to_Opensource.egg-info``.
+
+Le ``egg-info`` est une simple collection de fichiers texte purement informatifs, et le ``dist`` est le contenu de ce qui sera hébergé sur PyPi_.
+
+Dernier élément d'un package open-source: la license. Elles sont toutes disponibles sur OpenSourceInitiative_, il suffit de la copier-coller dans le fichier `LICENSE` et de remplacer les noms des auteurs et la date !
+
+Pour un projet open-source entièrement libre, la license new BSD-3 est courante en machine learning..
+
+**CORRECTION :** ``git checkout master setup.py LICENSE``
 
 Exercice n°10: Gestion du dépôt
 ===============================
 
-Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il maintenant nécessaire de donner à ses deux populations les outils dont ils ont besoin.
+Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il est nécessaire de donner à ses deux populations les outils dont ils ont besoin.
 Une accessibilité simple et maitrisée pour les premiers, de clarté sur les règles de leur engagement pour les seconds.
 
-Pour faciliter l'accessibilité du package, sa mise à disposition sur PiPy est un *defacto* standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consommateurs de maitriser l'inclusion du package dans leur projet en en contrôlant par exemple les versions utilisées.
-Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (setup.py, doc/conf.py, ...), et pour ne pas risquer d'erreurs dans le maintien en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier **.bumpversion.cfg** à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initalement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
+Pour faciliter l'accessibilité du package, sa mise à disposition sur PyPi_ est *de facto* un standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consommateurs de maitriser l'inclusion du package dans leur projet en contrôlant par exemple les versions utilisées.
+Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``setup.py``, ``doc/conf.py``, ...), et pour ne pas risquer d'erreurs dans le maintien en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier ``.bumpversion.cfg`` à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez-y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initalement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
 
 .. code::
 
@@ -269,20 +313,22 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (setu
   tag = True
 
   [bumpversion:file:setup.py]
-  search = VERSION = "{current_version}"
-  replace = VERSION = "{new_version}"
+  search = version="{current_version}"
+  replace = version="{new_version}"
 
   [bumpversion:file:how_to_opensource/_version.py]
   search = __version__ = "{current_version}"
   replace = __version__ = "{new_version}"
 
   [bumpversion:file:doc/conf.py]
-  search = version = "{current_version}"
-  replace = version = "{new_version}"
+  search = release = "{current_version}"
+  replace = release = "{new_version}"
 
 Maintenant nous allons mettre en place la publication automatique sur PyPi, pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
 
 Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sûr à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
+
+**CORRECTION :** ``git checkout master .bumpversion.cfg``
 
 TODO ajouter template d'issue
 TODO ajouter une pull request
@@ -300,9 +346,9 @@ TODO ajouter une pull request
 .. _Sphinx: https://www.sphinx-doc.org/en/master/index.html
 .. _ReadTheDocs: https://readthedocs.org/
 .. _SphinxGallery: https://sphinx-gallery.github.io/stable/getting_started.html
-.. _CircleIO: https://circleci.com/
 .. _GitHubActions: https://github.com/features/actions
 .. _package: https://docs.python.org/3/tutorial/modules.html#packages
-.. _tutoriel: https://pythonhosted.org/an_example_pypi_project/setuptools.html
+.. _tutoriel: https://packaging.python.org/guides/distributing-packages-using-setuptools/
+.. _OpenSourceInitiative: https://opensource.org/licenses/BSD-3-Clause
 .. _bump2version: https://github.com/c4urself/bump2version
 .. _PyPi: https://pypi.org/account/register/
