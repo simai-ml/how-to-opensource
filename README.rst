@@ -17,8 +17,7 @@ Pré-requis
 ==========
 
 1. Avoir un compte GitHub
-2. Faire un **Fork** du dépôt (bouton en haut à droite de GitHub)
-3. Avoir une installation locale de conda
+2. Avoir une installation locale de conda
 
 Si vous n'avez pas de conda installé : téléchargez l'installeur Conda_ ou exécutez les commandes suivantes:
 
@@ -33,11 +32,16 @@ Attention à bien accepter la demande d'initialisation.
 Exercice n°1: Mise en place de l'environnement
 ==============================================
 
-Clonez votre dépôt forké:
+Créez un répertoire vide intitulé **how_to_opensource** sur GitHub.
+
+Clonez le contenu du repo **simai-ml/how_to_opensource** en local et poussez le sur votre compte personnel: 
 
 .. code:: shell-session
 
-  $ git clone https://github.com/COMPTE/how-to-opensource.git
+  $ git clone git@github.com:simai-ml/how-to-opensource.git
+  $ git remote add origin git@github.com:VOTREIDENTIFIANT/how_to_opensource.git
+  $ git branch -M master
+  $ git push -u origin master
 
 Installez et activez l'EnvConda_:
 
