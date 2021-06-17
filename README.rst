@@ -219,13 +219,14 @@ Exercice n°8: Intégration continue de la documentation
 Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier **.readthedocs.yml**, ajoutez donc ce fichier au dépôt avec le contenu suivant:
 
 .. code::
+
   version: 2
 
   build:
     image: latest
 
   conda:
-    environment: environment.yml
+    environment: environment.dev.yml
     
   sphinx:
     builder: html
