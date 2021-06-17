@@ -72,17 +72,7 @@ Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez un
   from how_to_opensource import add_two_vectors
   add_two_vectors(np.ones(2), np.ones(2))
 
-Exercice n°3: Création d'un test unitaire
-=========================================
-
-Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est d'utiliser Parameterize_ pour paramétriser les fonctions de test.
-Dans **how_to_opensource/tests/test_core.py** ajoutez une fonction de test validant le bon fonctionnement de `add_two_vectors` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validants que vos tests couvrent bien le code:
-
-.. code:: shell-session
-
-  $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
-
-Exercice n°4: Documentation de la fonction
+Exercice n°3: Documentation de la fonction
 ==========================================
 
 Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à `add_two_vectors` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
@@ -91,7 +81,7 @@ Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentat
 
   $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
-Exercice n°5: Typing
+Exercice n°4: Typing
 ====================
 
 Une pratique courante pour rendre plus robuste un package consiste à utiliser le typing pour tout ou partie du code. Si l'interpréteur python ne vérifie pas ces types à l'exécution, le langage python propose néanmoins le vocabulaire et la grammaire nécessaire à la définition de ces types par l'intermédiaire du module Typing_.
@@ -100,6 +90,16 @@ Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test
 .. code:: shell-session
 
   $ mypy how_to_opensource --strict
+
+Exercice n°5: Création d'un test unitaire
+=========================================
+
+Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est d'utiliser Parameterize_ pour paramétriser les fonctions de test.
+Dans **how_to_opensource/tests/test_core.py** ajoutez une fonction de test validant le bon fonctionnement de `add_two_vectors` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validants que vos tests couvrent bien le code:
+
+.. code:: shell-session
+
+  $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
 Exercice n°6: Intégration continue du code
 ==========================================
