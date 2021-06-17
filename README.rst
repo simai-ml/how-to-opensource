@@ -43,7 +43,7 @@ Clonez le contenu du repo **simai-ml/how_to_opensource** en local et poussez le 
   $ git branch -M master
   $ git push -u origin master
 
-Installez et activez l'EnvConda_:
+Installez et activez l'EnvConda_ de développement, environnement qui nous servira à développer le code, la documentation et les tests:
 
 .. code:: shell-session
 
