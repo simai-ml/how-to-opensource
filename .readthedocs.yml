@@ -4,7 +4,7 @@ build:
   image: latest
 
 conda:
-  environment: environment.doc.yml
+  environment: environment.dev.yml
   
 sphinx:
   builder: html
