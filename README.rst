@@ -54,6 +54,9 @@ Créer une branche de travail et supprimez la correction :
   git checkout -b work
   chmod +x start.sh
   ./start.sh
+  git add .
+  git commit -m "start exercises"
+  git push origin work
 
 Vous pouvez commencer !
 
