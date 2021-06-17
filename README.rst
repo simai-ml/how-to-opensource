@@ -78,7 +78,7 @@ La première ligne de code vous permet de faire directement ``from how_to_openso
 
 La ligne ``__all__ = ...`` permet à la fonction d'être importée avec la syntaxe ``from how_to_opensource import *``.
 
-Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.1"``.
+Enfin, nous anticipons d'ores et déjà le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.1"``.
 
 Il est maintenant possible de tester interactivement la méthode :
 
@@ -106,11 +106,7 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 Exercice n°3: Documentation de la fonction
 ==========================================
 
-Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à `add_two_vectors` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
-
-.. code:: shell-session
-
-  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à `add_two_vectors` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_.
 
 **CORRECTION :** ``git checkout master how_to_opensource/core.py``
 
