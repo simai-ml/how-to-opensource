@@ -82,7 +82,7 @@ La première ligne de code vous permet de faire directement ``from how_to_openso
 
 La ligne ``__all__ = ...`` permet à la fonction d'être importée avec la syntaxe ``from how_to_opensource import *``.
 
-Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.1"``.
+Enfin, nous anticipons d'ores et déjà le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.1"``.
 
 Il est maintenant possible de tester interactivement la méthode :
 
