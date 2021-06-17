@@ -208,6 +208,8 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
   
 Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre documentation est belle !
 
+**CORRECTION :** ``git checkout master doc``
+
 Exercice n°8: Intégration continue de la documentation
 ======================================================
 
