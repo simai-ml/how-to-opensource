@@ -72,6 +72,8 @@ Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez un
   from how_to_opensource import add_two_vectors
   add_two_vectors(np.ones(2), np.ones(2))
 
+**CORRECTION :** `git checkout master how_to_opensource/core.py`
+
 Exercice n°3: Documentation de la fonction
 ==========================================
 
@@ -80,6 +82,8 @@ Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentat
 .. code:: shell-session
 
   $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+
+**CORRECTION :** `git checkout master how_to_opensource/core.py`
 
 Exercice n°4: Typing
 ====================
@@ -90,6 +94,8 @@ Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test
 .. code:: shell-session
 
   $ mypy how_to_opensource --strict
+
+**CORRECTION :** `git checkout master how_to_opensource/core.py`
 
 Exercice n°5: Création d'un test unitaire
 =========================================
