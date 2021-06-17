@@ -275,15 +275,15 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (setu
   search = version = "{current_version}"
   replace = version = "{new_version}"
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi. Le fonctionnement cible est de déclencher automatiquement à la release d'une nouvelle version dans GitHub, la publication vers PyPi. Cela signifie donc que le workflow devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléménts nécessaires à cette autentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans GitHub.
-Une fois connecté sur PyPi, rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. Cliquez sur *Add Token*, donnez lui un nom, par exemple how-to-opensource et donnez lui accès au scope complet.
-
-Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sûr à porter sur la license, le canon du moment étant BSD3 pour les projets opensource. Copiez le token généré et gardez cette page ouverte au cas où.
+Maintenant nous allons mettre en place la publication automatique sur PyPi. Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi. Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléménts nécessaires à cette autentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
+Pour cela, une fois connecté sur PyPi, rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. Cliquez sur *Add Token*, donnez lui un nom, par exemple *how-to-opensource* et donnez lui accès au scope complet.
 Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Setting*, section *Secrets*. Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi.
 
-Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet action du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*
+Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
 
-TODO ajouter template d'issue
+Enfin il convient d'ajouter de documenter les règles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sûr à porter sur la license, le canon du moment étant BSD3 pour les projets opensource. Copiez le token généré et gardez cette page ouverte au cas où.
+Il est aussi utile afin d'améliorer l'efficacité des opérations de maintenance, de définir des template d'incidents afin de maximiser vos chances d'obtenir les informations nécessaires à la compréhension du problème et à sa correction. GitHub permet celà à partir de la page *Settings*, section *Features*, *Setup Template*.
+
 TODO ajouter une pull request
 
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
