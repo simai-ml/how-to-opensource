@@ -95,7 +95,7 @@ Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test
 
   $ mypy how_to_opensource --strict
 
-**CORRECTION :** `git checkout master how_to_opensource/core.py`
+**CORRECTION :** `git checkout master how_to_opensource/core.py mypy.ini`
 
 Exercice n°5: Création d'un test unitaire
 =========================================
