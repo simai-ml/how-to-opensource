@@ -68,7 +68,7 @@ Exercice n°2: Création d'un module et d'une fonction
 ====================================================
 
 Nous allons maintenant créer dans le Module_ **how_to_opensource** une nouvelle fonction calculant la somme de deux vecteurs.
-Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction `add_two_vectors`.
+Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction :code:`add_two_vectors`.
 
 Afin de pouvoir importer la fonction, vous devez définir les redirections d'imports dans le fichier **how_to_opensource/__init__.py**.
 
@@ -78,11 +78,11 @@ Afin de pouvoir importer la fonction, vous devez définir les redirections d'imp
   from ._version import __version__
   __all__ = ["add_two_vectors", "__version__"]
 
-La première ligne de code vous permet de faire directement `from how_to_opensource import add_two_vectors` au lieu de `from how_to_opensource.core import add_two_vectors`.
+La première ligne de code vous permet de faire directement :python:`from how_to_opensource import add_two_vectors` au lieu de :python:`from how_to_opensource.core import add_two_vectors`.
 
-La ligne `__all__ = ...` permet à la fonction d'être importée avec la syntaxe `from how_to_opensource import *`.
+La ligne :python:`__all__ = ...` permet à la fonction d'être importée avec la syntaxe :python:`from how_to_opensource import *`.
 
-Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier `_version.py` qui contient une seule ligne de code : `__version__ = "0.0.1"`.
+Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier :code:`_version.py` qui contient une seule ligne de code : :python:`__version__ = "0.0.1"`.
 
 Il est maintenant possible de tester interactivement la méthode :
 
@@ -105,7 +105,7 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 
   $ flake8 how_to_opensource
 
-**CORRECTION :** `git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py`
+**CORRECTION :** :code:`git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py`
 
 Exercice n°3: Documentation de la fonction
 ==========================================
@@ -116,7 +116,7 @@ Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentat
 
   $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
-**CORRECTION :** `git checkout master how_to_opensource/core.py`
+**CORRECTION :** :code:`git checkout master how_to_opensource/core.py`
 
 Exercice n°4: Typing
 ====================
@@ -128,7 +128,7 @@ Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test
 
   $ mypy how_to_opensource --strict
 
-**CORRECTION :** `git checkout master how_to_opensource/core.py mypy.ini`
+**CORRECTION :** :code:`git checkout master how_to_opensource/core.py mypy.ini`
 
 Exercice n°5: Création d'un test unitaire
 =========================================
@@ -140,7 +140,7 @@ Dans **how_to_opensource/tests/test_core.py** ajoutez une fonction de test valid
 
   $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
-**CORRECTION :** `git checkout master how_to_opensource/tests/test_core.py`
+**CORRECTION :** :code:`git checkout master how_to_opensource/tests/test_core.py`
 
 Exercice n°6: Intégration continue du code
 ==========================================
