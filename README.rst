@@ -222,16 +222,24 @@ Pour diffuser cette documentation il est nécessaire de la publier sur un site p
     image: latest
 
   conda:
-    environment: environment.yml
+    environment: environment.dev.yml
     
   sphinx:
     builder: html
     configuration: doc/conf.py
     fail_on_warning: false
 
-Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHUB. Une fois inscrit et connecté, importez votre projet GitHUB, après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
+Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHUB.
 
-Nous avons maintenant en place un pipeline automatique de publication de documentation. Nous allons maintenant ajouter l'intégration continue de cette documentation et pour cela utiliser le service CircleIO_
+Une fois inscrit et connecté, importez votre projet GitHUB (attention à ajouter votre trigramme par souci d'unicité).
+
+Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Cela assure que la documentation est reconstruire à chaque pull request.
+
+Après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
+
+**@VIANNEY : peux-tu vérifier s'il y a besoin d'une manipulation supplémentaire type github webhook ou c'est superflu ? Est-ce que la CI readthedocs s'affiche bien dans github sans le webhook ?"
+
+**CORRECTION :** ``git checkout master .readthedocs.yml``
 
 Exercice n°9: Packaging
 =======================
