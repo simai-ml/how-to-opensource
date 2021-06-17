@@ -64,7 +64,23 @@ Exercice n°2: Création d'un module et d'une fonction
 ====================================================
 
 Nous allons maintenant créer dans le Module_ **how_to_opensource** une nouvelle fonction calculant la somme de deux vecteurs.
-Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction `add_two_vectors`. Il est maintenant possible de tester interactivement la méthode :
+Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction `add_two_vectors`.
+
+Afin de pouvoir importer la fonction, vous devez définir les redirections d'imports dans le fichier **how_to_opensource/__init__.py**.
+
+.. code:: python
+
+  from .core import add_two_vectors
+  from ._version import __version__
+  __all__ = ["add_two_vectors", "__version__"]
+
+La première ligne de code vous permet de faire directement `from how_to_opensource import add_two_vectors` au lieu de `from how_to_opensource.core import add_two_vectors`.
+
+La ligne `__all__ = ...` permet à la fonction d'être importée avec la syntaxe `from how_to_opensource import *`.
+
+Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier `_version.py` qui contient une seule ligne de code : `__version__ = "0.0.1"`.
+
+Il est maintenant possible de tester interactivement la méthode :
 
 .. code:: python
 
@@ -72,7 +88,14 @@ Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez un
   from how_to_opensource import add_two_vectors
   add_two_vectors(np.ones(2), np.ones(2))
 
-**CORRECTION :** `git checkout master how_to_opensource/core.py`
+ou la version du package : 
+
+.. code:: python
+
+  import how_to_opensource
+  print(how_to_opensource.__version__)
+
+**CORRECTION :** `git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py`
 
 Exercice n°3: Documentation de la fonction
 ==========================================
