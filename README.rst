@@ -152,7 +152,7 @@ Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet 
 
 Une fois le fichier créé poussé sur le dépôt, vous pouvez suivre l'execution du pipeline depuis l'interface de GitHub. Un mail vous sera automatiquement envoyé en fin d'execution pour vous informer des résultats.
 
-**CORRECTION :** ``git checkout master .github/workflows/python-package-conda.yml``
+**CORRECTION :** ``git checkout master .github/workflows/test.yml``
 
 Exercice n°7: Génération de la documentation
 ============================================
