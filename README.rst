@@ -324,7 +324,14 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``se
   search = release = "{current_version}"
   replace = release = "{new_version}"
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi, pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
+Vous pouvez désormais incrémenter le numéro de version avec ``bumpversion``:
+
+.. code:: shell-session
+
+  $ bumpversion minor
+  $ git push --tags
+
+Maintenant nous allons mettre en place la publication automatique sur PyPi_, pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
 
 Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sûr à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
 
