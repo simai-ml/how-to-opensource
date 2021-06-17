@@ -78,11 +78,11 @@ Afin de pouvoir importer la fonction, vous devez définir les redirections d'imp
   from ._version import __version__
   __all__ = ["add_two_vectors", "__version__"]
 
-La première ligne de code vous permet de faire directement :python:`from how_to_opensource import add_two_vectors` au lieu de :python:`from how_to_opensource.core import add_two_vectors`.
+La première ligne de code vous permet de faire directement :code:`from how_to_opensource import add_two_vectors` au lieu de :code:`from how_to_opensource.core import add_two_vectors`.
 
-La ligne :python:`__all__ = ...` permet à la fonction d'être importée avec la syntaxe :python:`from how_to_opensource import *`.
+La ligne :code:`__all__ = ...` permet à la fonction d'être importée avec la syntaxe :code:`from how_to_opensource import *`.
 
-Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier :code:`_version.py` qui contient une seule ligne de code : :python:`__version__ = "0.0.1"`.
+Enfin, nous anticipons d'ores et le packaging en introduisant un numéro de version dans le fichier :code:`_version.py` qui contient une seule ligne de code : :code:`__version__ = "0.0.1"`.
 
 Il est maintenant possible de tester interactivement la méthode :
 
