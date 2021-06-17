@@ -44,8 +44,17 @@ Installez et activez l'EnvConda_:
 .. code:: shell-session
 
   cd how-to-opensource
-  conda env create -f environment.yml
+  conda env create -f environment.dev.yml
   conda activate how_to_opensource
+
+Créer une branche de travail et supprimez la correction :
+
+.. code:: shell-session
+
+  git checkout -b work
+  ./start.sh
+
+Vous pouvez commencer !
 
 Exercice n°2: Création d'un module et d'une fonction
 ====================================================
