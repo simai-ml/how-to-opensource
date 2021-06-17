@@ -1,7 +1,6 @@
 import numpy as np
-
-from typing import Any
 from numpy.typing import ArrayLike
+
 
 def add_two_vectors(
     a: ArrayLike,
