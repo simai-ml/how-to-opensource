@@ -303,11 +303,6 @@ Dernier élément d'un package open-source: la license. Elles sont toutes dispon
 
 Pour un projet open-source entièrement libre, la license new BSD-3 est courante en machine learning..
 
-**CORRECTION :** ``git checkout master setup.py LICENSE``
-
-Exercice n°10: Gestion du dépôt
-===============================
-
 Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il est nécessaire de donner à ses deux populations les outils dont ils ont besoin.
 Une accessibilité simple et maitrisée pour les premiers, de clarté sur les règles de leur engagement pour les seconds.
 
@@ -340,14 +335,36 @@ Vous pouvez désormais incrémenter le numéro de version avec ``bumpversion``:
   $ bumpversion minor
   $ git push --tags
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi_, pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
+Votre publication sur PyPi_ se fait simplement avec la commande :
 
-Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires. Une attention particulière étant bien sûr à porter sur la license, le canon du moment étant BSD3 pour les projets opensource.
+.. code:: shell-session
 
-**CORRECTION :** ``git checkout master .bumpversion.cfg``
+  $ twine upload dist/*
 
-TODO ajouter template d'issue
-TODO ajouter une pull request
+Attention, cette commande nécessite un identifiant et un mot de passe, il faut donc vous créer un compte au préalable sur PyPi_.
+
+**CORRECTION :** ``git checkout master setup.py LICENSE .bumpversion.cfg``
+
+Exercice n°10: déploiement continu
+==================================
+
+Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
+
+Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires.
+
+Vous pouvez également naviguer dans l'onglet Insights > Community de github et remplir votre projet avec des template d'issue, pull request ou codes de conduite.
+
+**CORRECTION :** ``git checkout master .github/workflows/publish.yml``
+
+BONUS: Gestion du dépôt sur le long terme
+=========================================
+
+Quelques bonnes pratiques de gestion du dépôt sur le long terme :
+
+* Tout problème ou amélioration du code doit faire l'objet d'une isse avant une pull request. Les pull request doivent être reliées aux issues qu'elles résolvent.
+* Tout incrément de code doit passer par des pull request revue par une personne tierce
+* L'onglet GitHub Projects vous permets d'organiser les issues sous formes de cartes simili-Trello, et rend publique votre feuille de route de développement.
+* Il est recommandé d'ajouter deux fichiers de documentation à votre repo : un ``CONTRIBUTING.md`` qui renseigne les contributeurs éventuels sur l'art et la manière de faire des pull request pour ce projet, et un ``RELEASE_CHECKLIST.md`` récapitulant toutes les étapes de vérification avant publication sur PyPi_. Vous trouverez un exemple sur MAPIE_.
 
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
 .. _EnvConda: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
@@ -368,3 +385,4 @@ TODO ajouter une pull request
 .. _OpenSourceInitiative: https://opensource.org/licenses/BSD-3-Clause
 .. _bump2version: https://github.com/c4urself/bump2version
 .. _PyPi: https://pypi.org/account/register/
+.. _MAPIE: https://github.com/simai-ml/MAPIE
