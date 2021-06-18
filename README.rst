@@ -417,7 +417,7 @@ Vous pouvez également naviguer dans l'onglet Insights > Community de github et 
 
 **CORRECTION :** ``git checkout master .github/workflows/publish.yml``
 
-RECAPITULATIF
+Récaputulatif
 =============
 
 Voici les 10 bonnes pratiques de développement open-source: 
