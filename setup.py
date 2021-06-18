@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name="QM How to Opensource",
-    version="0.0.1",
+    version="0.1.0",
     author="Grégoire Martignon, Vianney Taquet, Damien Hervault",
     author_email="gmartignon@quantmetry.com",
     description="A Quantmetry tutorial on how to publish an opensource python package.",
