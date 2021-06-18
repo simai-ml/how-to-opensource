@@ -3,4 +3,6 @@
 doc/_build
 doc/auto_examples
 build
+dist
+**egg-INFO
 .vscode

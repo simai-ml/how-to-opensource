@@ -1,0 +1,31 @@
+name: Unit tests
+
+on: [push, pull_request]
+
+jobs:
+  build-linux:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: [3.8, 3.9]
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+    - name: Git clone
+      uses: actions/checkout@v2
+    - name: Set up virtual environment
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        channels: defaults, conda-forge
+    - name: Install dependencies
+      run: conda install flake8 mypy numpy pytest-cov
+    - name: Check linting
+      run: flake8 how_to_opensource
+    - name: Check static typing
+      run: mypy how_to_opensource --strict
+    - name: Test with pytest
+      run: pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
