@@ -222,6 +222,10 @@ Pour créer un exemple qui s'affichera dans la doc, vous devez simplement créer
 
 Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre documentation est belle !
 
+.. code:: shell-session
+
+  open doc/_build/html/index.html
+
 **CORRECTION :** ``git checkout master doc examples``
 
 Exercice n°8: Intégration continue de la documentation
