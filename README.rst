@@ -280,6 +280,8 @@ De façon à offrir une API claire à l'ensemble des modules de notre projet (ce
 
 Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteurs qui s'afficheront tels quels sur PyPi_.
 
+**IMPORTANT :** chaque package doit avoir un nom unique sur PyPi_, qui est déduit du paramètre ``name``. Pensez-bien à ajouter votre trigramme dans le ``name`` pour que chacun puisse publier son package sans conflit de noms.
+
 .. code:: python
 
   import os
@@ -291,7 +293,7 @@ Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteu
 
 
   setup(
-      name="QM How to Opensource",
+      name="QM How to Opensource by TRIGRAMME",
       version="0.0.1",
       author="Grégoire Martignon, Vianney Taquet, Damien Hervault",
       author_email="gmartignon@quantmetry.com",
