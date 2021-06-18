@@ -9,3 +9,4 @@ rm -f .readthedocs.yml
 rm -f setup.py
 rm -f LICENSE
 rm -f .bumpversion.cfg
+rm -f build dist *egg-info
