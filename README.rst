@@ -216,18 +216,19 @@ Exercice n°8: Intégration continue de la documentation
 Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier **.readthedocs.yml**, ajoutez donc ce fichier au dépôt avec le contenu suivant:
 
 .. code::
-  version: 2
 
-  build:
-    image: latest
+    version: 2
 
-  conda:
-    environment: environment.dev.yml
-    
-  sphinx:
-    builder: html
-    configuration: doc/conf.py
-    fail_on_warning: false
+    build:
+      image: latest
+
+    conda:
+      environment: environment.dev.yml
+      
+    sphinx:
+      builder: html
+      configuration: doc/conf.py
+      fail_on_warning: false
 
 Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHUB.
 
@@ -237,7 +238,7 @@ Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull re
 
 Après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
 
-**@VIANNEY : peux-tu vérifier s'il y a besoin d'une manipulation supplémentaire type github webhook ou c'est superflu ? Est-ce que la CI readthedocs s'affiche bien dans github sans le webhook ?"
+**VIANNEY : peux-tu vérifier s'il y a besoin d'une manipulation supplémentaire type github webhook ou c'est superflu ? Est-ce que la CI readthedocs s'affiche bien dans github sans le webhook ?**
 
 **CORRECTION :** ``git checkout master .readthedocs.yml``
 
@@ -289,6 +290,14 @@ Il ne vous reste plus qu'à construire votre package
 Cela crée trois répertoires : ``dist``, ``build`` et ``QM_How_to_Opensource.egg-info``.
 
 Le ``egg-info`` est une simple collection de fichiers texte purement informatifs, et le ``dist`` est le contenu de ce qui sera hébergé sur PyPi_.
+
+Si vous voulez vérifier que votre `README.rst` est sans erreur, vous pouvez exécuter la commande 
+
+.. code:: shell-session
+
+  $ twine check dist/*
+
+**N.B.** Cette commande vérifie le contenu du répertoire ``dist``. En conséquence, si vous modifiez le ``README.rst``, il faut exécuter à nouveau la commande ``python setup.py sdist`` pour faire un nouveau check.
 
 Dernier élément d'un package open-source: la license. Elles sont toutes disponibles sur OpenSourceInitiative_, il suffit de la copier-coller dans le fichier `LICENSE` et de remplacer les noms des auteurs et la date !
 

@@ -22,6 +22,7 @@ setup(
         "docs": ["sphinx", "sphinx-gallery", "sphinx_rtd_theme", "numpydoc"]
     },
     long_description=read('README.rst'),
+    long_description_content_type='text/x-rst',
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3.9"
