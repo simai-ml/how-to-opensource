@@ -19,6 +19,22 @@ BBL - Publier un package en open-source en dix étapes clés
 
 Quelles sont les étapes indispensables pour publier un package Python en open-source ? Depuis l’écriture d’un code propre et la rédaction de la documentation, jusqu’aux tests d’intégration continue et au processus de packaging, nous passerons en revue les dix points clés pour une publication d’un package Python en open-source. Pour ce faire, nous prendrons l’exemple d’un toy model que nous publierons sur github et pypi en moins de deux heures.
 
+Sommaire
+========
+
+Voici les 10 bonnes pratiques de développement open-source détaillées ci-après dans ce tutoriel : 
+
+1. **Mettre en place un dépôt GitHub,** soit à partir de zéro, soit en forkant un dépôt existant
+2. **Encapsuler les fonctions dans un module** facile à importer et renseignant un numéro de version
+3. **Documenter les fonctions avec une dosctring et un doctest.** La docstring sera automatiquement publié en ligne et le doctest automatiquement exécuté pendant l'intégration continue.
+4. **Ecrire vos fonctions avec déclaration de types.** C'est une habitude facile à prendre qui génère automatiquement des tests unitaires statiques avec MyPy_.
+5. **Créer des tests unitaires avec un objectif de couverture de 100%.** La paramétrisation des tests avec ``pytest.xmark.parametrize`` permet de générer des tests très rapidement.
+6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
+7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
+8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
+9. **Packager votre module avec le fichier ``setup.py``.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
+10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
+
 Pré-requis
 ==========
 
@@ -386,6 +402,8 @@ Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Settin
 
 Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, renommez le fichier ``publish.yml``, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
 
+Pour déclencher le workflow, allez sur la page principale du dépôt GitHub, à droite, cliquez sur Releases. Vous devriez voir tous les tags poussés jusqu'à présent. Choisissez le dernier et cliquez sur "Edit tag". Pensez à bien pointer sur la branche ``work``. Cliquez ensuite sur "Publish release". L'action de publication s'est normalement déclenchée dans l'onglet GitHub Actions. Une fois terminée, vous pouvez vérifier que la mise à jour sur PyPi_ s'est bien déroulée.
+
 Enfin il convient d'ajouter de documenter les règles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires.
 
 Vous pouvez également naviguer dans l'onglet Insights > Community de github et remplir votre projet avec des template d'issue, pull request ou codes de conduite.
@@ -398,6 +416,22 @@ Vous pouvez également naviguer dans l'onglet Insights > Community de github et 
   $ git push --tags
 
 **CORRECTION :** ``git checkout master .github/workflows/publish.yml``
+
+RECAPITULATIF
+=============
+
+Voici les 10 bonnes pratiques de développement open-source: 
+
+1. **Mettre en place un dépôt GitHub,** soit à partir de zéro, soit en forkant un dépôt existant
+2. **Encapsuler les fonctions dans un module** facile à importer et renseignant un numéro de version
+3. **Documenter les fonctions avec une dosctring et un doctest.** La docstring sera automatiquement publié en ligne et le doctest automatiquement exécuté pendant l'intégration continue.
+4. **Ecrire vos fonctions avec déclaration de types.** C'est une habitude facile à prendre qui génère automatiquement des tests unitaires statiques avec MyPy_.
+5. **Créer des tests unitaires avec un objectif de couverture de 100%.** La paramétrisation des tests avec ``pytest.xmark.parametrize`` permet de générer des tests très rapidement.
+6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
+7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
+8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
+9. **Packager votre module avec le fichier ``setup.py``.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
+10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
 
 BONUS: Gestion du dépôt sur le long terme
 =========================================
