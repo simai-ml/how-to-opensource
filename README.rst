@@ -248,9 +248,9 @@ Pour diffuser cette documentation il est nécessaire de la publier sur un site p
       configuration: doc/conf.py
       fail_on_warning: false
 
-Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHUB.
+Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHub.
 
-Une fois inscrit et connecté, importez votre projet GitHUB (attention à ajouter votre trigramme par souci d'unicité).
+Une fois inscrit et connecté, importez votre projet GitHub (attention à ajouter votre trigramme par souci d'unicité).
 
 Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Cela assure que la documentation est reconstruite à chaque pull request.
 
