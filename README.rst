@@ -348,7 +348,11 @@ Attention, cette commande nécessite un identifiant et un mot de passe, il faut 
 Exercice n°10: déploiement continu
 ==================================
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Pour cela rendez vous dans l'onglet action du projet GitHub. Commençez par créer un compte sur PyPi_. Ajoutez ensuite un nouveau worflow en vous basant sur le template "Publish Python Package".
+Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi. Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléments nécessaires à cette autentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
+Pour cela, une fois connecté sur PyPi, rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. Cliquez sur *Add Token*, donnez lui un nom, par exemple *how-to-opensource* et donnez lui accès au scope complet. Copiez le token généré et gardez cette page ouverte au cas où.
+Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Setting*, section *Secrets*. Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi.
+
+Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
 
 Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires.
 
@@ -365,6 +369,8 @@ Quelques bonnes pratiques de gestion du dépôt sur le long terme :
 * Tout incrément de code doit passer par des pull request revue par une personne tierce
 * L'onglet GitHub Projects vous permets d'organiser les issues sous formes de cartes simili-Trello, et rend publique votre feuille de route de développement.
 * Il est recommandé d'ajouter deux fichiers de documentation à votre repo : un ``CONTRIBUTING.md`` qui renseigne les contributeurs éventuels sur l'art et la manière de faire des pull request pour ce projet, et un ``RELEASE_CHECKLIST.md`` récapitulant toutes les étapes de vérification avant publication sur PyPi_. Vous trouverez un exemple sur MAPIE_.
+
+Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
 
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
 .. _EnvConda: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
