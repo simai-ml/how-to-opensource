@@ -1,6 +1,6 @@
 .. -*- mode: rst -*-
 
-|GitHubActionTestBadge|_ |ReadTheDocsBadge|_ |GitHubActionPublishBadge|_ |PythonVersion|_ |PyPiBadge|_
+|GitHubActionTestBadge|_ |ReadTheDocsBadge|_ |GitHubActionPublishBadge|_ |PyPiBadge|_
 
 .. |GitHubActionTestBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/test.yml/badge.svg
 .. _GitHubActionTestBadge: https://github.com/simai-ml/how-to-opensource/actions
@@ -10,9 +10,6 @@
 
 .. |GitHubActionPublishBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/publish.yml/badge.svg
 .. _GitHubActionPublishBadge: https://github.com/simai-ml/how-to-opensource/actions
-
-.. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/QM-How-to-Opensource
-.. _PythonVersion: https://pypi.org/project/QM-How-to-Opensource/
 
 .. |PyPiBadge| image:: https://img.shields.io/pypi/v/QM-How-to-Opensource
 .. _PyPiBadge: https://pypi.org/project/QM-How-to-Opensource/
@@ -391,7 +388,7 @@ Il faut pour cela, ajoutez dans le README situé à la racine du dépôt les lie
 
 .. code::
 
-  |GitHubActionTestBadge|_ |ReadTheDocsBadge|_ |GitHubActionPublishBadge|_ |PythonVersion|_ |PyPiBadge|_
+  |GitHubActionTestBadge|_ |ReadTheDocsBadge|_ |GitHubActionPublishBadge|_ |PyPiBadge|_
 
   .. |GitHubActionTestBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/test.yml/badge.svg
   .. _GitHubActionTestBadge: https://github.com/simai-ml/how-to-opensource/actions
@@ -401,9 +398,6 @@ Il faut pour cela, ajoutez dans le README situé à la racine du dépôt les lie
   
   .. |GitHubActionPublishBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/publish.yml/badge.svg
   .. _GitHubActionPublishBadge: https://github.com/simai-ml/how-to-opensource/actions
-  
-  .. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/QM-How-to-Opensource
-  .. _PythonVersion: https://pypi.org/project/QM-How-to-Opensource/
   
   .. |PyPiBadge| image:: https://img.shields.io/pypi/v/QM-How-to-Opensource
   .. _PyPiBadge: https://pypi.org/project/QM-How-to-Opensource/
