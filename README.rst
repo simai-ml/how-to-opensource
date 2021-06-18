@@ -205,10 +205,24 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
     :maxdepth: 2
 
     auto_examples/index
-  
+
+Pour créer un exemple qui s'affichera dans la doc, vous devez simplement créer un script python dans le répertoire ``examples``. Par exemple :
+
+.. code:: python
+
+  """
+  ===========
+  Toy Example
+  ===========
+  L'exemple le plus simple que l'on puisse imaginer.
+  """
+
+  from how_to_opensource import add_two_vectors
+  add_two_vectors([12.5, 26.1], [7.5, 3.9])
+
 Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre documentation est belle !
 
-**CORRECTION :** ``git checkout master doc``
+**CORRECTION :** ``git checkout master doc examples``
 
 Exercice n°8: Intégration continue de la documentation
 ======================================================
