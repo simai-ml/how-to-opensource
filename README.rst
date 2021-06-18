@@ -238,8 +238,8 @@ Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre do
 
 **CORRECTION :** ``git checkout master doc examples``
 
-Exercice n°8: Intégration continue de la documentation
-======================================================
+Exercice n°8: Déploiement continu de la documentation
+=====================================================
 
 Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier ``.readthedocs.yml``, ajoutez donc ce fichier au dépôt avec le contenu suivant:
 
@@ -262,18 +262,21 @@ Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitH
 
 Une fois inscrit et connecté, importez votre projet GitHub (attention à ajouter votre trigramme par souci d'unicité).
 
-Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Cela assure que la documentation est reconstruite à chaque pull request.
-
 Après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
 
-**VIANNEY : peux-tu vérifier s'il y a besoin d'une manipulation supplémentaire type github webhook ou c'est superflu ? Est-ce que la CI readthedocs s'affiche bien dans github sans le webhook ?**
+Pour automatiser la compilation de la doc à chaque pull request, allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Il faut également connecter vos comptes GitHub et ReadTheDocs par un webhook comme suit :
+
+1. sur votre compte ReadTheDocs, allez dans Admin > Integrations > Add integration > GitHub incoming webhook
+2. sur votre repo GitHub, allez dans Settings > Webhooks > Add webhook > copier l'URL "payload URL" de readthedocs.
+
+Et voilà ! Votre documentation se reconstruit automatiquement à chaque pull request !
 
 **CORRECTION :** ``git checkout master .readthedocs.yml``
 
 Exercice n°9: Packaging
 =======================
 
-De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapsulant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
+De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapsulant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier ``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
 
 Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteurs qui s'afficheront tels quels sur PyPi_.
 
