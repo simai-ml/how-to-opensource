@@ -136,7 +136,7 @@ Exercice n°5: Création d'un test unitaire
 =========================================
 
 Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est d'utiliser Parameterize_ pour paramétriser les fonctions de test.
-Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test validant le bon fonctionnement de ``add_two_vectors`` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validants que vos tests couvrent bien le code:
+Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test validant le bon fonctionnement de ``add_two_vectors`` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validant que vos tests couvrent bien le code:
 
 .. code:: shell-session
 
@@ -151,12 +151,12 @@ Afin d'assurer un niveau de qualité constant, particulièrement dans le cas d'u
 
 - minimiser la charge de travail pour les concepteurs
 - supprimer les erreurs arrivent dans toute action "à la main"
-- réduire le temps nécessaire à la détection et l'analyse de problèmes car chaque changement est validé granulairement
+- réduire le temps nécessaire à la détection et l'analyse de problèmes car chaque changement est validé unitairement
 - réduire le temps de cycle pour la livraison de nouvelles fonctionnalités tout en en améliorant la qualité
 
-Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet rendez vous sur l'onglet **Actions**. Pour scréer notre workflow d'intégration continue nous allons partir du template **Python Package using Anaconda**, cliquez sur **Setup this workflow**, et renommez le fichier ``test.yml``. Modifiez ensuite les étapes du workflow pour coller aux éléments défins précédement:
+Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet rendez vous sur l'onglet **Actions**. Pour créer notre workflow d'intégration continue nous allons partir du template **Python Package using Anaconda**, cliquez sur **Setup this workflow**, et renommez le fichier ``test.yml``. Modifiez ensuite les étapes du workflow pour coller aux éléments définis précédemment:
 
-- déploiement sur Python 3.9 , Python 3.8, Ubuntu et Windowd
+- déploiement sur Python 3.9 , Python 3.8, Ubuntu et Windows
 - installation de flake8, mypy, numpy, et pytest-cov
 - tester le linting, le typing et les tests unitaires
 
@@ -175,7 +175,7 @@ Avoir une documentation à jour est indispensable autant pour les utilisateurs q
 
 Note: il n'est pas nécessaire de séparer les répertoires sources et build dans notre cas simple.
 
-Pour génerer la documentation il vous suffit maintenant d'exécuter le script nouvellement créé:
+Pour générer la documentation il vous suffit maintenant d'exécuter le script nouvellement créé:
 
 .. code:: shell-session
 
@@ -198,7 +198,7 @@ Afin de permettre de trouver le module et d'activer la prise en compte des types
   napoleon_use_param = True
 
 Une méthode efficace pour enrichir la documentation consiste à ajouter des exemples que l'on met en valeur à l'aide de SphinxGallery_.
-Dans ``doc/conf.py``, ajoutez l'extension ``'sphinx_gallery.gen_gallery'``, puis définisez la configuration de la gallerie:
+Dans ``doc/conf.py``, ajoutez l'extension ``'sphinx_gallery.gen_gallery'``, puis définissez la configuration de la galerie:
 
 .. code:: python
 
@@ -216,7 +216,7 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
 
     auto_examples/index
   
-Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre documentation est belle !
+Vous pouvez alors reconstruire la doc avec ``make html`` et vérifier que votre documentation est belle !
 
 **CORRECTION :** ``git checkout master doc``
 
@@ -255,7 +255,7 @@ Après avoir soigneusement choisi la branche et la version, lancez la compilatio
 Exercice n°9: Packaging
 =======================
 
-De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapuslant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
+De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapsulant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
 
 Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteurs qui s'afficheront tels quels sur PyPi_.
 
@@ -314,10 +314,10 @@ Dernier élément d'un package open-source: la license. Elles sont toutes dispon
 Pour un projet open-source entièrement libre, la license new BSD-3 est courante en machine learning..
 
 Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il est nécessaire de donner à ses deux populations les outils dont ils ont besoin.
-Une accessibilité simple et maitrisée pour les premiers, de clarté sur les règles de leur engagement pour les seconds.
+Une accessibilité simple et maîtrisée pour les premiers, de clarté sur les règles de leur engagement pour les seconds.
 
-Pour faciliter l'accessibilité du package, sa mise à disposition sur PyPi_ est *de facto* un standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consommateurs de maitriser l'inclusion du package dans leur projet en contrôlant par exemple les versions utilisées.
-Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``setup.py``, ``doc/conf.py``, ...), et pour ne pas risquer d'erreurs dans le maintien en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier ``.bumpversion.cfg`` à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez-y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initalement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
+Pour faciliter l'accessibilité du package, sa mise à disposition sur PyPi_ est *de facto* un standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consommateurs de maîtriser l'inclusion du package dans leur projet en contrôlant par exemple les versions utilisées.
+Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``setup.py``, ``doc/conf.py``, ...), et pour ne pas risquer d'erreurs dans le maintien en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier ``.bumpversion.cfg`` à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez-y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initialement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
 
 .. code::
 
@@ -358,13 +358,13 @@ Attention, cette commande nécessite un identifiant et un mot de passe, il faut 
 Exercice n°10: déploiement continu
 ==================================
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi. Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléments nécessaires à cette autentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
+Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi. Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléments nécessaires à cette authentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
 Pour cela, une fois connecté sur PyPi, rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. Cliquez sur *Add Token*, donnez lui un nom, par exemple *how-to-opensource* et donnez lui accès au scope complet. Copiez le token généré et gardez cette page ouverte au cas où.
 Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Setting*, section *Secrets*. Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi_.
 
 Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, renommez le fichier ``publish.yml``, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
 
-Enfin il convient d'ajouter de documenter les régles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires.
+Enfin il convient d'ajouter de documenter les règles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires.
 
 Vous pouvez également naviguer dans l'onglet Insights > Community de github et remplir votre projet avec des template d'issue, pull request ou codes de conduite.
 
@@ -375,7 +375,7 @@ BONUS: Gestion du dépôt sur le long terme
 
 Quelques bonnes pratiques de gestion du dépôt sur le long terme :
 
-* Tout problème ou amélioration du code doit faire l'objet d'une isse avant une pull request. Les pull request doivent être reliées aux issues qu'elles résolvent.
+* Tout problème ou amélioration du code doit faire l'objet d'une issue avant une pull request. Les pull request doivent être reliées aux issues qu'elles résolvent.
 * Tout incrément de code doit passer par des pull request revue par une personne tierce
 * L'onglet GitHub Projects vous permets d'organiser les issues sous formes de cartes simili-Trello, et rend publique votre feuille de route de développement.
 * Il est recommandé d'ajouter deux fichiers de documentation à votre repo : un ``CONTRIBUTING.md`` qui renseigne les contributeurs éventuels sur l'art et la manière de faire des pull request pour ce projet, et un ``RELEASE_CHECKLIST.md`` récapitulant toutes les étapes de vérification avant publication sur PyPi_. Vous trouverez un exemple sur MAPIE_.
@@ -383,7 +383,7 @@ Quelques bonnes pratiques de gestion du dépôt sur le long terme :
 Bonus: Badges
 =============
 
-Notre intégration continue est maintenant en place. Afin de donner une vue de sythèse de son execution et de donner confiance aux utilisateurs potentiels quand à la qualité du package, il est possible d'ajouter des badges qui donneront un status à jour de l'execution de l'intégration continue.
+Notre intégration continue est maintenant en place. Afin de donner une vue de synthèse de son execution et de donner confiance aux utilisateurs potentiels quand à la qualité du package, il est possible d'ajouter des badges qui donneront un status à jour de l'execution de l'intégration continue.
 Il faut pour cela, ajoutez dans le README situé à la racine du dépôt les liens suivants:
 
 .. code::
