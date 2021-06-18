@@ -390,6 +390,13 @@ Enfin il convient d'ajouter de documenter les règles de contribution et d'usage
 
 Vous pouvez également naviguer dans l'onglet Insights > Community de github et remplir votre projet avec des template d'issue, pull request ou codes de conduite.
 
+**IMPORTANT :** Vous avez déjà publié une version de votre package à l'étape précédente. Pour republier une nouvelle version, vous être obligé de "bumper" la version à nouveau :
+
+.. code:: shell-session
+
+  $ bumpversion patch
+  $ git push --tags
+
 **CORRECTION :** ``git checkout master .github/workflows/publish.yml``
 
 BONUS: Gestion du dépôt sur le long terme
