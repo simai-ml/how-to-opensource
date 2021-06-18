@@ -1,4 +1,5 @@
 rm -f how_to_opensource/__init__.py
+touch how_to_opensource/__init__.py
 rm -f how_to_opensource/_version.py
 rm -f how_to_opensource/core.py
 rm -f mypy.ini
