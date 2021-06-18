@@ -1,12 +1,21 @@
 .. -*- mode: rst -*-
 
-|GitHubActionsBadge|_ |ReadTheDocsBadge|_
+|GitHubActionTestBadge|_ |ReadTheDocsBadge|_ |GitHubActionPublishBadge|_ |PythonVersion|_ |PyPiBadge|_
 
-.. |GitHubActionsBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/python-package-conda.yml/badge.svg
-.. _GitHubActionsBadge: https://github.com/simai-ml/how-to-opensource/actions
+.. |GitHubActionTestBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/test.yml/badge.svg
+.. _GitHubActionTestBadge: https://github.com/simai-ml/how-to-opensource/actions
 
 .. |ReadTheDocsBadge| image:: https://readthedocs.org/projects/how-to-opensource/badge
 .. _ReadTheDocsBadge: https://how-to-opensource.readthedocs.io/en/latest
+
+.. |GitHubActionPublishBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/publish.yml/badge.svg
+.. _GitHubActionPublishBadge: https://github.com/simai-ml/how-to-opensource/actions
+
+.. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/QM-How-to-Opensource
+.. _PythonVersion: https://pypi.org/project/QM-How-to-Opensource/
+
+.. |PyPiBadge| image:: https://img.shields.io/pypi/v/QM-How-to-Opensource
+.. _PyPiBadge: https://pypi.org/project/QM-How-to-Opensource/
 
 BBL - Publier un package en open-source en dix étapes clés
 ==========================================================
@@ -106,7 +115,11 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 Exercice n°3: Documentation de la fonction
 ==========================================
 
-Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à `add_two_vectors` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_.
+Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à ``add_two_vectors`` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
+
+.. code:: shell-session
+
+  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
 **CORRECTION :** ``git checkout master how_to_opensource/core.py``
 
@@ -114,7 +127,7 @@ Exercice n°4: Typing
 ====================
 
 Une pratique courante pour rendre plus robuste un package consiste à utiliser le typing pour tout ou partie du code. Si l'interpréteur python ne vérifie pas ces types à l'exécution, le langage python propose néanmoins le vocabulaire et la grammaire nécessaire à la définition de ces types par l'intermédiaire du module Typing_.
-Typez maintenant les définitions de `add_two_vectors` et de sa fonction de test. Il est aussi possible d'ajouter un test à l'exécution pour valider que les entrées se conforment au type attendu. Enfin lancez l'analyseur statique de code le second statique utilisant MyPy_.
+Typez maintenant les définitions de ``add_two_vectors`` et de sa fonction de test. Il est aussi possible d'ajouter un test à l'exécution pour valider que les entrées se conforment au type attendu. Enfin lancez l'analyseur statique de code le second statique utilisant MyPy_.
 
 .. code:: shell-session
 
@@ -370,6 +383,31 @@ Quelques bonnes pratiques de gestion du dépôt sur le long terme :
 * L'onglet GitHub Projects vous permets d'organiser les issues sous formes de cartes simili-Trello, et rend publique votre feuille de route de développement.
 * Il est recommandé d'ajouter deux fichiers de documentation à votre repo : un ``CONTRIBUTING.md`` qui renseigne les contributeurs éventuels sur l'art et la manière de faire des pull request pour ce projet, et un ``RELEASE_CHECKLIST.md`` récapitulant toutes les étapes de vérification avant publication sur PyPi_. Vous trouverez un exemple sur MAPIE_.
 
+Bonus: Badges
+=============
+
+Notre intégration continue est maintenant en place. Afin de donner une vue de sythèse de son execution et de donner confiance aux utilisateurs potentiels quand à la qualité du package, il est possible d'ajouter des badges qui donneront un status à jour de l'execution de l'intégration continue.
+Il faut pour cela, ajoutez dans le README situé à la racine du dépôt les liens suivants:
+
+.. code::
+
+  |GitHubActionTestBadge|_ |ReadTheDocsBadge|_ |GitHubActionPublishBadge|_ |PythonVersion|_ |PyPiBadge|_
+
+  .. |GitHubActionTestBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/test.yml/badge.svg
+  .. _GitHubActionTestBadge: https://github.com/simai-ml/how-to-opensource/actions
+  
+  .. |ReadTheDocsBadge| image:: https://readthedocs.org/projects/how-to-opensource/badge
+  .. _ReadTheDocsBadge: https://how-to-opensource.readthedocs.io/en/latest
+  
+  .. |GitHubActionPublishBadge| image:: https://github.com/simai-ml/how-to-opensource/actions/workflows/publish.yml/badge.svg
+  .. _GitHubActionPublishBadge: https://github.com/simai-ml/how-to-opensource/actions
+  
+  .. |PythonVersion| image:: https://img.shields.io/pypi/pyversions/QM-How-to-Opensource
+  .. _PythonVersion: https://pypi.org/project/QM-How-to-Opensource/
+  
+  .. |PyPiBadge| image:: https://img.shields.io/pypi/v/QM-How-to-Opensource
+  .. _PyPiBadge: https://pypi.org/project/QM-How-to-Opensource/
+  
 .. _Conda: https://docs.conda.io/en/latest/miniconda.html
 .. _EnvConda: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
 .. _Module: https://docs.python.org/3/tutorial/modules.html
