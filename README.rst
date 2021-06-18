@@ -63,10 +63,10 @@ Vous pouvez commencer !
 Exercice n°2: Création d'un module et d'une fonction
 ====================================================
 
-Nous allons maintenant créer dans le Module_ **how_to_opensource** une nouvelle fonction calculant la somme de deux vecteurs.
-Pour cela rendez vous dans le fichier **how_to_opensource/core.py** et créez une nouvelle fonction ``add_two_vectors``.
+Nous allons maintenant créer dans le Module_ ``how_to_opensource`` une nouvelle fonction calculant la somme de deux vecteurs.
+Pour cela rendez vous dans le fichier ``how_to_opensource/core.py`` et créez une nouvelle fonction ``add_two_vectors``.
 
-Afin de pouvoir importer la fonction, vous devez définir les redirections d'imports dans le fichier **how_to_opensource/__init__.py**.
+Afin de pouvoir importer la fonction, vous devez définir les redirections d'imports dans le fichier ``how_to_opensource/__init__.py``.
 
 .. code:: python
 
@@ -126,7 +126,7 @@ Exercice n°5: Création d'un test unitaire
 =========================================
 
 Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est d'utiliser Parameterize_ pour paramétriser les fonctions de test.
-Dans **how_to_opensource/tests/test_core.py** ajoutez une fonction de test validant le bon fonctionnement de `add_two_vectors` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validants que vos tests couvrent bien le code:
+Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test validant le bon fonctionnement de ``add_two_vectors`` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validants que vos tests couvrent bien le code:
 
 .. code:: shell-session
 
@@ -172,14 +172,14 @@ Pour génerer la documentation il vous suffit maintenant d'exécuter le script n
   $ cd doc
   $ make html
 
-La documentation a été générée dans le repertoire **doc/_build**, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter `'sphinx.ext.autodoc'`, `'sphinx.ext.napoleon'`, et `'sphinx_autodoc_typehints'` à la liste des extensions. Enfin, il faut ajouter la documentation automatique du module dans **doc/index.rst** qui sera par ailleurs le point d'entrée de toute rédaction additionnelle:
+La documentation a été générée dans le repertoire ``doc/_build``, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter ``'sphinx.ext.autodoc'``, ``'sphinx.ext.napoleon'``, et ``'sphinx_autodoc_typehints'`` à la liste des extensions. Enfin, il faut ajouter la documentation automatique du module dans ``doc/index.rst`` qui sera par ailleurs le point d'entrée de toute rédaction additionnelle:
 
 .. code::
 
   .. automodule:: how_to_opensource
      :members:
 
-Afin de permettre de trouver le module et d'activer la prise en compte des types, ajoutez les lignes suivantes au fichier **doc/conf.py**:
+Afin de permettre de trouver le module et d'activer la prise en compte des types, ajoutez les lignes suivantes au fichier ``doc/conf.py``:
 
 .. code:: python
 
@@ -188,7 +188,7 @@ Afin de permettre de trouver le module et d'activer la prise en compte des types
   napoleon_use_param = True
 
 Une méthode efficace pour enrichir la documentation consiste à ajouter des exemples que l'on met en valeur à l'aide de SphinxGallery_.
-Dans **doc/conf.py**, ajoutez l'extension `'sphinx_gallery.gen_gallery'`, puis définisez la configuration de la gallerie:
+Dans ``doc/conf.py``, ajoutez l'extension ``'sphinx_gallery.gen_gallery'``, puis définisez la configuration de la gallerie:
 
 .. code:: python
 
@@ -197,7 +197,7 @@ Dans **doc/conf.py**, ajoutez l'extension `'sphinx_gallery.gen_gallery'`, puis d
     'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
   }
 
-Enfin il est nécessaire d'inclure cette galerie à la racine de la documentation, dans **doc/index.rst** ajoutez son inclusion:
+Enfin il est nécessaire d'inclure cette galerie à la racine de la documentation, dans ``doc/index.rst`` ajoutez son inclusion:
 
 .. code::
 
@@ -213,7 +213,7 @@ Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre do
 Exercice n°8: Intégration continue de la documentation
 ======================================================
 
-Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier **.readthedocs.yml**, ajoutez donc ce fichier au dépôt avec le contenu suivant:
+Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier ``.readthedocs.yml``, ajoutez donc ce fichier au dépôt avec le contenu suivant:
 
 .. code::
 
@@ -245,7 +245,7 @@ Après avoir soigneusement choisi la branche et la version, lancez la compilatio
 Exercice n°9: Packaging
 =======================
 
-De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapuslant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier **setup.py** à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
+De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapuslant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
 
 Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteurs qui s'afficheront tels quels sur PyPi_.
 
@@ -350,7 +350,7 @@ Exercice n°10: déploiement continu
 
 Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi. Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléments nécessaires à cette autentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
 Pour cela, une fois connecté sur PyPi, rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. Cliquez sur *Add Token*, donnez lui un nom, par exemple *how-to-opensource* et donnez lui accès au scope complet. Copiez le token généré et gardez cette page ouverte au cas où.
-Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Setting*, section *Secrets*. Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi.
+Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Setting*, section *Secrets*. Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi_.
 
 Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, renommez le fichier ``publish.yml``, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
 
