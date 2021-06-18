@@ -7,4 +7,5 @@ rm -f .github/workflows/*
 rm -rf doc
 rm -f .readthedocs.yml
 rm -f setup.py
+rm -f LICENSE
 rm -f .bumpversion.cfg
