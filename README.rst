@@ -30,7 +30,7 @@ Voici les 10 bonnes pratiques de développement open-source détaillées ci-apr�
 4. **Ecrire vos fonctions avec déclaration de types.** C'est une habitude facile à prendre qui génère automatiquement des tests unitaires statiques avec MyPy_.
 5. **Créer des tests unitaires avec un objectif de couverture de 100%.** La paramétrisation des tests avec ``pytest.xmark.parametrize`` permet de générer des tests très rapidement.
 6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
-7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
+7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Il ne reste plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
 8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
 9. **Packager votre module avec le fichier ``setup.py``.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
 10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
@@ -276,7 +276,7 @@ Pour diffuser cette documentation il est nécessaire de la publier sur un site p
 
 Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHub.
 
-Une fois inscrit et connecté, importez votre projet GitHub (attention à ajouter votre trigramme par souci d'unicité).
+Une fois inscrit et connecté, importez votre projet GitHub (attention à ajouter votre trigramme à l'url du projet par souci d'unicité).
 
 Après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
 
