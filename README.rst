@@ -134,7 +134,8 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 
 **CORRECTION :**
 
-.. code:: python
+.. code:: shell-session
+
   git checkout master how_to_opensource/__init__.py how_to_opensource/core_exo2.py how_to_opensource/_version.py
   cp -f how_to_opensource/core_exo2.py how_to_opensource/core.py
 
@@ -154,7 +155,8 @@ l'exécution pour valider que les entrées se conforment au type attendu. Enfin 
 
 **CORRECTION :**
 
-.. code:: python
+.. code:: shell-session
+
   git checkout master how_to_opensource/core.py mypy.ini
   cp -f how_to_opensource/core_exo3.py how_to_opensource/core.py
 
