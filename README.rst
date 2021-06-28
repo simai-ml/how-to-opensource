@@ -136,8 +136,8 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 
 .. code:: shell-session
 
-  git checkout master how_to_opensource/__init__.py how_to_opensource/core_exo2.py how_to_opensource/_version.py
-  cp -f how_to_opensource/core_exo2.py how_to_opensource/core.py
+  git checkout master how_to_opensource/__init__.py how_to_opensource/core_exo3.py how_to_opensource/_version.py
+  awk '{gsub(/result: ArrayLike|: ArrayLike|-> ArrayLike/, "")}1' core_exo3.py > core.py
 
 
 Exercice n°3: Typing
