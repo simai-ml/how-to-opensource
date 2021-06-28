@@ -294,7 +294,7 @@ Pour créer un exemple qui s'affichera dans la doc, vous devez simplement créer
   from how_to_opensource import add_two_vectors
   add_two_vectors([12.5, 26.1], [7.5, 3.9])
 
-Le dossier ``examples`` tout juste crée doit s'accompagner d'un fichier ``README.rst`` avec un titre comme:
+Le dossier ``examples`` tout juste créé doit s'accompagner d'un fichier ``README.rst`` avec un titre comme:
 
 .. code::
 
@@ -438,7 +438,7 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``se
   replace = release = "{new_version}"
 
 Vous pouvez désormais incrémenter le numéro de version avec ``bumpversion``.
-Trois choix sont possibles pour l'incrémentation du numéro de version: patch, minor, et major. Nous choisissons ici d'effectuer un "patch":
+Trois choix sont possibles pour l'incrémentation du numéro de version: patch, minor, et major. Nous choisissons ici d'incrémenter le "patch":
 
 .. code:: shell-session
 
