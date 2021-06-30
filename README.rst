@@ -136,8 +136,7 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 
 .. code:: shell-session
 
-  git checkout master how_to_opensource/__init__.py how_to_opensource/core_exo3.py how_to_opensource/_version.py
-  awk '{gsub(/result: ArrayLike|: ArrayLike|-> ArrayLike/, "")}1' core_exo3.py > core.py
+  git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py
 
 
 Exercice n°3: Typing
@@ -158,7 +157,6 @@ l'exécution pour valider que les entrées se conforment au type attendu. Enfin 
 .. code:: shell-session
 
   git checkout master how_to_opensource/core.py mypy.ini
-  cp -f how_to_opensource/core_exo3.py how_to_opensource/core.py
 
 
 Exercice n°4: Documentation de la fonction
@@ -171,7 +169,11 @@ sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en
 
   $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
-**CORRECTION :** ``git checkout master how_to_opensource/core.py``
+**CORRECTION :** 
+
+.. code:: shell-session
+
+  git checkout master how_to_opensource/core.py
 
 
 Exercice n°5: Création d'un test unitaire
