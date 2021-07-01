@@ -19,6 +19,22 @@ BBL - Publier un package en open-source en dix étapes clés
 
 Quelles sont les étapes indispensables pour publier un package Python en open-source ? Depuis l’écriture d’un code propre et la rédaction de la documentation, jusqu’aux tests d’intégration continue et au processus de packaging, nous passerons en revue les dix points clés pour une publication d’un package Python en open-source. Pour ce faire, nous prendrons l’exemple d’un toy model que nous publierons sur github et pypi en moins de deux heures.
 
+Sommaire
+========
+
+Voici les 10 bonnes pratiques de développement open-source détaillées ci-après dans ce tutoriel : 
+
+1. **Mettre en place un dépôt GitHub,** soit à partir de zéro, soit en forkant un dépôt existant
+2. **Encapsuler les fonctions dans un module** facile à importer et renseignant un numéro de version
+3. **Documenter les fonctions avec une dosctring et un doctest.** La docstring sera automatiquement publié en ligne et le doctest automatiquement exécuté pendant l'intégration continue.
+4. **Ecrire vos fonctions avec déclaration de types.** C'est une habitude facile à prendre qui génère automatiquement des tests unitaires statiques avec MyPy_.
+5. **Créer des tests unitaires avec un objectif de couverture de 100%.** La paramétrisation des tests avec ``pytest.xmark.parametrize`` permet de générer des tests très rapidement.
+6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
+7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Il ne reste plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
+8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
+9. **Packager votre module avec le fichier setup.py.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
+10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
+
 Pré-requis
 ==========
 
@@ -70,7 +86,8 @@ Exercice n°2: Création d'un module et d'une fonction
 ====================================================
 
 Nous allons maintenant créer dans le Module_ ``how_to_opensource`` une nouvelle fonction calculant la somme de deux vecteurs.
-Pour cela rendez vous dans le fichier ``how_to_opensource/core.py`` et créez une nouvelle fonction ``add_two_vectors``.
+Pour cela créez le fichier ``how_to_opensource/core.py`` et créez une nouvelle fonction ``add_two_vectors`` qui va, comme son
+nom l'indique, effectuer une addition de deux vecteurs grâce à ``numpy.add``.
 
 Afin de pouvoir importer la fonction, vous devez définir les redirections d'imports dans le fichier ``how_to_opensource/__init__.py``.
 
@@ -80,11 +97,21 @@ Afin de pouvoir importer la fonction, vous devez définir les redirections d'imp
   from ._version import __version__
   __all__ = ["add_two_vectors", "__version__"]
 
-La première ligne de code vous permet de faire directement ``from how_to_opensource import add_two_vectors`` au lieu de ``from how_to_opensource.core import add_two_vectors``.
+La première ligne de code vous permet de faire directement
+
+.. code:: python
+  
+  from how_to_opensource import add_two_vectors
+  
+au lieu de 
+
+.. code:: python
+  
+  from how_to_opensource.core import add_two_vectors
 
 La ligne ``__all__ = ...`` permet à la fonction d'être importée avec la syntaxe ``from how_to_opensource import *``.
 
-Enfin, nous anticipons d'ores et déjà le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.1"``.
+Enfin, nous anticipons d'ores et déjà le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.0"``.
 
 Il est maintenant possible de tester interactivement la méthode :
 
@@ -107,36 +134,57 @@ Si vous voulez vérifier la syntaxe de votre code, vous pouvez exécuter la comm
 
   $ flake8 how_to_opensource
 
-**CORRECTION :** ``git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py``
-
-Exercice n°3: Documentation de la fonction
-==========================================
-
-Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à ``add_two_vectors`` spécifiant ses paramètres, sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
+**CORRECTION :**
 
 .. code:: shell-session
 
-  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+  git checkout master how_to_opensource/__init__.py how_to_opensource/core.py how_to_opensource/_version.py
 
-**CORRECTION :** ``git checkout master how_to_opensource/core.py``
 
-Exercice n°4: Typing
+Exercice n°3: Typing
 ====================
 
-Une pratique courante pour rendre plus robuste un package consiste à utiliser le typing pour tout ou partie du code. Si l'interpréteur python ne vérifie pas ces types à l'exécution, le langage python propose néanmoins le vocabulaire et la grammaire nécessaire à la définition de ces types par l'intermédiaire du module Typing_.
-Typez maintenant les définitions de ``add_two_vectors`` et de sa fonction de test. Il est aussi possible d'ajouter un test à l'exécution pour valider que les entrées se conforment au type attendu. Enfin lancez l'analyseur statique de code le second statique utilisant MyPy_.
+Une pratique courante pour rendre plus robuste un package consiste à utiliser le typing pour tout ou une partie du code. 
+Si l'interpréteur python ne vérifie pas ces types à l'exécution, le langage python propose néanmoins le vocabulaire et la grammaire
+nécessaire à la définition de ces types par l'intermédiaire du module Typing_.
+Typez maintenant les définitions de ``add_two_vectors`` et de sa fonction de test. Il est aussi possible d'ajouter un test à
+l'exécution pour valider que les entrées se conforment au type attendu. Enfin lancez l'analyseur statique de code le second statique utilisant MyPy_.
 
 .. code:: shell-session
 
   $ mypy how_to_opensource --strict
 
-**CORRECTION :** ``git checkout master how_to_opensource/core.py mypy.ini``
+**CORRECTION :**
+
+.. code:: shell-session
+
+  git checkout master how_to_opensource/core.py mypy.ini
+
+
+Exercice n°4: Documentation de la fonction
+==========================================
+
+Numpydoc_ propose une méthode de documentation efficace. Ajoutez une documentation à ``add_two_vectors`` spécifiant ses paramètres,
+sa sortie et en y incluant une DocTest_. Lancez ensuite la procédure de test en incluant cette fois le test de la documentation.
+
+.. code:: shell-session
+
+  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+
+**CORRECTION :** 
+
+.. code:: shell-session
+
+  git checkout master how_to_opensource/core.py
+
 
 Exercice n°5: Création d'un test unitaire
 =========================================
 
-Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est d'utiliser Parameterize_ pour paramétriser les fonctions de test.
-Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test validant le bon fonctionnement de ``add_two_vectors`` en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validant que vos tests couvrent bien le code:
+Il convient maintenant de tester cette fonction avec PyTest_. Une méthode standard pour élargir rapidement le domaine testé est
+d'utiliser Parameterize_ pour paramétriser les fonctions de test.
+Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test validant le bon fonctionnement de ``add_two_vectors``
+en testant différentes dimensions de vecteurs. Lancez maintenant le test en générant les métriques validant que vos tests couvrent bien le code:
 
 .. code:: shell-session
 
@@ -144,30 +192,40 @@ Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test valid
 
 **CORRECTION :** ``git checkout master how_to_opensource/tests/test_core.py``
 
+
 Exercice n°6: Intégration continue du code
 ==========================================
 
-Afin d'assurer un niveau de qualité constant, particulièrement dans le cas d'un projet opensource avec de multiples contributeurs, il est indispensable d'automatiser le processus d'intégration des changements réalisés. C'est à ce point que répond l'intégration continue. Se basant sur la description d'un pipeline incluant build, test et déploiement, les outils d'integration continue, par exemple GitHubActions_ ou TravisCI_ en permettent l'automatisation. Cela apporte les valeurs suivantes:
+Afin d'assurer un niveau de qualité constant, particulièrement dans le cas d'un projet opensource avec de multiples contributeurs, il est
+indispensable d'automatiser le processus d'intégration des changements réalisés. C'est à ce point que répond l'intégration continue.
+Se basant sur la description d'un pipeline incluant build, test et déploiement, les outils d'integration continue, par exemple
+GitHubActions_ ou TravisCI_ en permettent l'automatisation. Cela apporte les valeurs suivantes:
 
 - minimiser la charge de travail pour les concepteurs
-- supprimer les erreurs arrivent dans toute action "à la main"
+- supprimer les erreurs arrivant dans toute action "à la main"
 - réduire le temps nécessaire à la détection et l'analyse de problèmes car chaque changement est validé unitairement
 - réduire le temps de cycle pour la livraison de nouvelles fonctionnalités tout en en améliorant la qualité
 
-Nous allons utiliser les GitHub actions, pour cela sur la GiHub de votre projet rendez vous sur l'onglet **Actions**. Pour créer notre workflow d'intégration continue nous allons partir du template **Python Package using Anaconda**, cliquez sur **Setup this workflow**, et renommez le fichier ``test.yml``. Modifiez ensuite les étapes du workflow pour coller aux éléments définis précédemment:
+Nous allons utiliser les GitHub actions, pour cela rendez vous sur l'onglet **Actions** de la page GiHub de votre projet.
+Pour créer notre workflow d'intégration continue nous allons partir du template **Python Package using Anaconda**, disponible après avoir
+cliqué sur **Setup this workflow**. Créez le fichier ``test.yml`` dans le dossier ``.github/workflows``, copiez le template proposé par GitHub
+puis modifiez ensuite les étapes du workflow pour coller aux éléments définis précédemment:
 
 - déploiement sur Python 3.9 , Python 3.8, Ubuntu et Windows
 - installation de flake8, mypy, numpy, et pytest-cov
 - tester le linting, le typing et les tests unitaires
 
-Une fois le fichier créé poussé sur le dépôt, vous pouvez suivre l'execution du pipeline depuis l'interface de GitHub. Un mail vous sera automatiquement envoyé en fin d'execution pour vous informer des résultats.
+Une fois le fichier créé poussé sur le dépôt, vous pouvez suivre l'execution du pipeline depuis l'interface de GitHub.
+Un mail vous sera automatiquement envoyé en fin d'execution pour vous informer des résultats.
 
 **CORRECTION :** ``git checkout master .github/workflows/test.yml``
+
 
 Exercice n°7: Génération de la documentation
 ============================================
 
-Avoir une documentation à jour est indispensable autant pour les utilisateurs que pour les contributeurs. Afin de faciliter la création et la maintenance de celle-ci nous allons utiliser Sphinx_. Le quick start de Sphinx permet l'initialisation rapide des éléments nécessaires.
+Avoir une documentation à jour est indispensable autant pour les utilisateurs que pour les contributeurs.
+Afin de faciliter la création et la maintenance de celle-ci nous allons utiliser Sphinx_. Le quick start de Sphinx permet l'initialisation rapide des éléments nécessaires.
 
 .. code:: shell-session
 
@@ -182,7 +240,17 @@ Pour générer la documentation il vous suffit maintenant d'exécuter le script 
   $ cd doc
   $ make html
 
-La documentation a été générée dans le repertoire ``doc/_build``, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide. En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4. Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter ``'sphinx.ext.autodoc'``, ``'sphinx.ext.napoleon'``, et ``'sphinx_autodoc_typehints'`` à la liste des extensions. Enfin, il faut ajouter la documentation automatique du module dans ``doc/index.rst`` qui sera par ailleurs le point d'entrée de toute rédaction additionnelle:
+La documentation a été générée dans le repertoire ``doc/_build``, vous pouvez la consulter dans votre navigateur web, elle est belle, mais vide.
+En plus de la rédaction que vous ne manquerez pas d'ajouter, il est important de capitaliser sur la documentation écrite à l'exercice n°4.
+Pour ce faire, il faut d'abord modifier le fichier **doc/conf.py** pour ajouter ``'sphinx.ext.autodoc'``, ``'sphinx.ext.napoleon'``, et ``'sphinx_autodoc_typehints'``
+à la liste des extensions. 
+Il faut également définir la version du package:
+
+.. code:: python 
+
+  release = 0.0.0
+
+Enfin, il faut ajouter la documentation automatique du module dans ``doc/index.rst`` qui sera par ailleurs le point d'entrée de toute rédaction additionnelle:
 
 .. code::
 
@@ -215,15 +283,42 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
     :maxdepth: 2
 
     auto_examples/index
-  
-Vous pouvez alors reconstruire la doc avec ``make html`` et vérifier que votre documentation est belle !
+
+Pour créer un exemple qui s'affichera dans la doc, vous devez simplement créer un script python dans le répertoire ``examples``. Par exemple :
+
+.. code:: python
+
+  """
+  ===========
+  Toy Example
+  ===========
+  L'exemple le plus simple que l'on puisse imaginer.
+  """
+
+  from how_to_opensource import add_two_vectors
+  add_two_vectors([12.5, 26.1], [7.5, 3.9])
+
+Le dossier ``examples`` tout juste créé doit s'accompagner d'un fichier ``README.rst`` avec un titre comme:
+
+.. code::
+
+  Exemples avancés
+  ================
+
+Vous pouvez alors reconstruire la doc avec `make html` et vérifier que votre documentation est belle !
+
+.. code:: shell-session
+
+  open doc/_build/html/index.html
 
 **CORRECTION :** ``git checkout master doc examples``
 
-Exercice n°8: Intégration continue de la documentation
-======================================================
 
-Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_. Ce dernier réalisera les tâches définies dans le fichier ``.readthedocs.yml``, ajoutez donc ce fichier au dépôt avec le contenu suivant:
+Exercice n°8: Déploiement continu de la documentation
+=====================================================
+
+Pour diffuser cette documentation il est nécessaire de la publier sur un site publique, par exemple en utilisant ReadTheDocs_.
+Ce dernier réalisera les tâches définies dans le fichier ``.readthedocs.yml``, ajoutez donc ce fichier au dépôt avec le contenu suivant:
 
 .. code::
 
@@ -240,24 +335,33 @@ Pour diffuser cette documentation il est nécessaire de la publier sur un site p
       configuration: doc/conf.py
       fail_on_warning: false
 
-Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHUB.
+Ensuite, créez un compte gratuit sur ReadTheDocs_ en utilisant votre login GitHub.
 
-Une fois inscrit et connecté, importez votre projet GitHUB (attention à ajouter votre trigramme par souci d'unicité).
-
-Allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". Cela assure que la documentation est reconstruite à chaque pull request.
+Une fois inscrit et connecté, importez votre projet GitHub (attention à ajouter votre trigramme à l'url du projet par souci d'unicité).
 
 Après avoir soigneusement choisi la branche et la version, lancez la compilation. Suivez son bon déroulement et vérifiez que la documentation produite est conforme à vos attentes.
 
-**VIANNEY : peux-tu vérifier s'il y a besoin d'une manipulation supplémentaire type github webhook ou c'est superflu ? Est-ce que la CI readthedocs s'affiche bien dans github sans le webhook ?**
+Pour automatiser la compilation de la doc à chaque pull request, allez ensuite dans Admin > Paramètres avancés et cochez la case "Build pull requests for this project". 
+Il faut également connecter vos comptes GitHub et ReadTheDocs par un webhook comme suit :
+
+1. sur votre compte ReadTheDocs, allez dans Admin > Integrations > Add integration > GitHub incoming webhook
+2. sur votre repo GitHub, allez dans Settings > Webhooks > Add webhook > copier l'URL "payload URL" de readthedocs.
+
+Et voilà ! Votre documentation se reconstruit automatiquement à chaque pull request !
 
 **CORRECTION :** ``git checkout master .readthedocs.yml``
+
 
 Exercice n°9: Packaging
 =======================
 
-De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer), il est utile de créer un package_ qui permet d'avoir un espace de nommage encapsulant les modules et variables, et diffusable directement sur PyPi_. Pour cela, il est nécessaire d'ajouter un fichier``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
+De façon à offrir une API claire à l'ensemble des modules de notre projet (certes il n'y en a qu'un en l'état mais cela est voué à changer),
+il est utile de créer un package_ qui permet d'avoir un espace de nommage encapsulant les modules et variables, et diffusable directement sur PyPi_.
+Pour cela, il est nécessaire d'ajouter un fichier ``setup.py`` à notre projet, et de le définir, vous pouvez pour cela partir de ce tutoriel_.
 
 Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteurs qui s'afficheront tels quels sur PyPi_.
+
+**IMPORTANT :** chaque package doit avoir un nom unique sur PyPi_, qui est déduit du paramètre ``name``. Pensez-bien à ajouter votre trigramme dans le ``name`` pour que chacun puisse publier son package sans conflit de noms.
 
 .. code:: python
 
@@ -270,7 +374,7 @@ Voici un exemple de fichier ``setup.py``, ce sont essentiellement des descripteu
 
 
   setup(
-      name="QM How to Opensource",
+      name="QM How to Opensource by TRIGRAMME",
       version="0.0.1",
       author="Grégoire Martignon, Vianney Taquet, Damien Hervault",
       author_email="gmartignon@quantmetry.com",
@@ -316,13 +420,12 @@ Pour un projet open-source entièrement libre, la license new BSD-3 est courante
 Notre package est maintenant en place, prêt à être publié et ouvert à sa communauté d'utilisateurs et de contributeurs. Il est nécessaire de donner à ses deux populations les outils dont ils ont besoin.
 Une accessibilité simple et maîtrisée pour les premiers, de clarté sur les règles de leur engagement pour les seconds.
 
-Pour faciliter l'accessibilité du package, sa mise à disposition sur PyPi_ est *de facto* un standard. Nous allons donc ajouter à nos workflow d'intégration continue cette publication. Elle sera déclenchée par la release d'une version du package, permettant un contrôle explicite des niveaux de code qualifiés et partagés. Ce versioning permet aussi aux consommateurs de maîtriser l'inclusion du package dans leur projet en contrôlant par exemple les versions utilisées.
 Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``setup.py``, ``doc/conf.py``, ...), et pour ne pas risquer d'erreurs dans le maintien en cohérence de cette information à plusieurs endroits, il est possible d'utiliser bump2version_. Pour cela créez un fichier ``.bumpversion.cfg`` à la racine du projet, ce dernier va définir dans quel fichier remplacer automatiquement le numéro de version. Ajoutez-y le contenu ci-dessous et assurez vous que tous les fichiers contiennent initialement les mêmes numéros de version, par la suite ils seront mis à jour automatiquement :
 
 .. code::
 
   [bumpversion]
-  current_version = 0.0.1
+  current_version = 0.0.0
   commit = True
   tag = True
 
@@ -338,11 +441,12 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``se
   search = release = "{current_version}"
   replace = release = "{new_version}"
 
-Vous pouvez désormais incrémenter le numéro de version avec ``bumpversion``:
+Vous pouvez désormais incrémenter le numéro de version avec ``bumpversion``.
+Trois choix sont possibles pour l'incrémentation du numéro de version: patch, minor, et major. Nous choisissons ici d'incrémenter le "patch":
 
 .. code:: shell-session
 
-  $ bumpversion minor
+  $ bumpversion patch
   $ git push --tags
 
 Votre publication sur PyPi_ se fait simplement avec la commande :
@@ -358,17 +462,59 @@ Attention, cette commande nécessite un identifiant et un mot de passe, il faut 
 Exercice n°10: déploiement continu
 ==================================
 
-Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi. Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi. Pour ne pas avoir à mettre en clair les éléments nécessaires à cette authentification dans votre dépôt, il existe un mécanisme permettant de se connecter à PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
-Pour cela, une fois connecté sur PyPi, rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. Cliquez sur *Add Token*, donnez lui un nom, par exemple *how-to-opensource* et donnez lui accès au scope complet. Copiez le token généré et gardez cette page ouverte au cas où.
-Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Setting*, section *Secrets*. Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi_.
+Maintenant nous allons mettre en place la publication automatique sur PyPi_ après chaque release officielle de votre package. 
+Le but est de déclencher automatiquement, à la publication d'une nouvelle release depuis GitHub, la publication de la nouvelle version du package vers PyPi.
+Cela signifie donc que le workflow GitHub devra se connecter à votre compte PyPi_. 
+Pour ne pas avoir à mettre en clair les éléments nécessaires à cette authentification dans votre dépôt, il existe un mécanisme permettant de se connecter à
+PyPi sur base d'un token, et de stocker ce token en tant qu'élément secret dans le dépôt GitHub.
+Pour cela, une fois connecté sur PyPi:
 
-Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*. Choisissez le template *Publish Python Package*, renommez le fichier ``publish.yml``, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
+- Rendez-vous sur la page *Account Settings* et descendez jusqu'à la section *API Tokens*. 
+
+- Cliquez sur *Add Token*, donnez lui un nom, par exemple *how-to-opensource* et donnez lui accès au scope complet. 
+
+- Copiez le token généré et gardez cette page ouverte au cas où.
+
+- Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Settings*, section *Secrets*.
+
+Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi_.
+
+Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela:
+
+- Rendez vous dans l'onglet *Actions* du projet GitHub et cliquez sur *New workflow*.
+
+- Choisissez le template *Publish Python Package*, renommez le fichier ``publish.yml``, spécifiez la version 3.9 de python et confirmez l'ajout du workflow.
+
+Pour déclencher le workflow, allez sur la page principale du dépôt GitHub, à droite, cliquez sur Releases. Vous devriez voir tous les tags poussés jusqu'à présent. Choisissez le dernier et cliquez sur "Edit tag". Pensez à bien pointer sur la branche ``work``. Cliquez ensuite sur "Publish release". L'action de publication s'est normalement déclenchée dans l'onglet GitHub Actions. Une fois terminée, vous pouvez vérifier que la mise à jour sur PyPi_ s'est bien déroulée.
 
 Enfin il convient d'ajouter de documenter les règles de contribution et d'usage du package. Pour cela rendez vous dans la page **Insights/Community** de GitHub. Cette dernière fournit un moyen simple d'initier les documents nécessaires.
 
 Vous pouvez également naviguer dans l'onglet Insights > Community de github et remplir votre projet avec des template d'issue, pull request ou codes de conduite.
 
+**IMPORTANT :** Vous avez déjà publié une version de votre package à l'étape précédente. Pour republier une nouvelle version, vous être obligé de "bumper" la version à nouveau :
+
+.. code:: shell-session
+
+  $ bumpversion patch
+  $ git push --tags
+
 **CORRECTION :** ``git checkout master .github/workflows/publish.yml``
+
+Récapitulatif
+=============
+
+Voici les 10 bonnes pratiques de développement open-source: 
+
+1. **Mettre en place un dépôt GitHub,** soit à partir de zéro, soit en forkant un dépôt existant
+2. **Encapsuler les fonctions dans un module** facile à importer et renseignant un numéro de version
+3. **Documenter les fonctions avec une dosctring et un doctest.** La docstring sera automatiquement publié en ligne et le doctest automatiquement exécuté pendant l'intégration continue.
+4. **Ecrire vos fonctions avec déclaration de types.** C'est une habitude facile à prendre qui génère automatiquement des tests unitaires statiques avec MyPy_.
+5. **Créer des tests unitaires avec un objectif de couverture de 100%.** La paramétrisation des tests avec ``pytest.xmark.parametrize`` permet de générer des tests très rapidement.
+6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
+7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
+8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
+9. **Packager votre module avec le fichier setup.py.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
+10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
 
 BONUS: Gestion du dépôt sur le long terme
 =========================================
