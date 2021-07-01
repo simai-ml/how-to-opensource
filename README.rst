@@ -100,6 +100,7 @@ Afin de pouvoir importer la fonction, vous devez définir les redirections d'imp
 La première ligne de code vous permet de faire directement
 
 .. code:: python
+
   from how_to_opensource import add_two_vectors
   
 au lieu de 
