@@ -476,6 +476,7 @@ Pour cela, une fois connecté sur PyPi:
 - Copiez le token généré et gardez cette page ouverte au cas où.
 
 - Dans une autre fenêtre, rendez vous sur votre dépôt GitHub à la page *Settings*, section *Secrets*.
+
 Appelez le PYPI_API_TOKEN et collez dans le champ *Value* le token copié depuis PyPi_.
 
 Nous pouvons maintenant mettre en place le workflow de publication automatique, pour cela:
