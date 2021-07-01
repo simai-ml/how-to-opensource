@@ -100,12 +100,13 @@ Afin de pouvoir importer la fonction, vous devez définir les redirections d'imp
 La première ligne de code vous permet de faire directement
 
 .. code:: python
-
+  
   from how_to_opensource import add_two_vectors
   
 au lieu de 
 
 .. code:: python
+  
   from how_to_opensource.core import add_two_vectors
 
 La ligne ``__all__ = ...`` permet à la fonction d'être importée avec la syntaxe ``from how_to_opensource import *``.
