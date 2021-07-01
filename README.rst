@@ -140,7 +140,7 @@ Dans ``how_to_opensource/tests/test_core.py`` ajoutez une fonction de test valid
 
 .. code:: shell-session
 
-  $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
 **CORRECTION :** ``git checkout master how_to_opensource/tests/test_core.py``
 
@@ -218,7 +218,7 @@ Enfin il est nécessaire d'inclure cette galerie à la racine de la documentatio
   
 Vous pouvez alors reconstruire la doc avec ``make html`` et vérifier que votre documentation est belle !
 
-**CORRECTION :** ``git checkout master doc``
+**CORRECTION :** ``git checkout master doc examples``
 
 Exercice n°8: Intégration continue de la documentation
 ======================================================
