@@ -7,7 +7,7 @@ def read(fname):
 
 
 setup(
-    name="QM How to Opensource by GMA",
+    name="QM How to Opensource",
     version="0.0.0",
     author="Grégoire Martinon, Vianney Taquet, Damien Hervault",
     author_email="gmartignon@quantmetry.com",
