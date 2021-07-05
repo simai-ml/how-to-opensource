@@ -32,7 +32,7 @@ Voici les 10 bonnes pratiques de développement open-source détaillées ci-apr�
 6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
 7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Il ne reste plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
 8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
-9. **Packager votre module avec le fichier ``setup.py``.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
+9. **Packager votre module avec le fichier setup.py.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
 10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
 
 Pré-requis
@@ -111,7 +111,7 @@ au lieu de
 
 La ligne ``__all__ = ...`` permet à la fonction d'être importée avec la syntaxe ``from how_to_opensource import *``.
 
-Enfin, nous anticipons d'ores et déjà le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.1"``.
+Enfin, nous anticipons d'ores et déjà le packaging en introduisant un numéro de version dans le fichier ``_version.py`` qui contient une seule ligne de code : ``__version__ = "0.0.0"``.
 
 Il est maintenant possible de tester interactivement la méthode :
 
@@ -188,7 +188,7 @@ en testant différentes dimensions de vecteurs. Lancez maintenant le test en gé
 
 .. code:: shell-session
 
-  $ pytest -vs --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
+  $ pytest -vs --doctest-modules --cov-branch --cov=how_to_opensource --pyargs how_to_opensource
 
 **CORRECTION :** ``git checkout master how_to_opensource/tests/test_core.py``
 
@@ -248,7 +248,7 @@ Il faut également définir la version du package:
 
 .. code:: python 
 
-  release = 0.0.1
+  release = 0.0.0
 
 Enfin, il faut ajouter la documentation automatique du module dans ``doc/index.rst`` qui sera par ailleurs le point d'entrée de toute rédaction additionnelle:
 
@@ -425,7 +425,7 @@ Dans la mesure où ce nom de version va se retrouver à plusieurs endroits (``se
 .. code::
 
   [bumpversion]
-  current_version = 0.0.1
+  current_version = 0.0.0
   commit = True
   tag = True
 
@@ -513,7 +513,7 @@ Voici les 10 bonnes pratiques de développement open-source:
 6. **Implémenter une intégration continue du code.** Sur GitHub, le standard est d'utiliser des GitHub Actions. Pensez à toujours tester votre code sur Windows.
 7. **Générer une documentation semi-automatique avec Sphinx_.** L'API de votre package est automatiquement documentée si vous avez écrit les docstrings à l'avance. Plus qu'à rédiger les parties importantes et les messages à faire passer aux utilisateurs. Les exemples sont un bon moyen d'accompagner la montée en compétences rapide des utilisateurs.
 8. **Déployer la documentation de manière continue avec ReadTheDocs_.** Le déploiement continu doit se déclencher a minima à chaque pull request.
-9. **Packager votre module avec le fichier ``setup.py``.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
+9. **Packager votre module avec le fichier setup.py.** Ce fichier est la pierre angulaire de la publication sur PyPi_. Les numéros de version sont plus facile à gérer avec bump2version_.
 10. **Déployer votre package de manière continue avec les release GitHub** et les actions correspondantes. Vous pouvez cacher votre mot de passe PyPi_ par un système de tokens.
 
 BONUS: Gestion du dépôt sur le long terme
